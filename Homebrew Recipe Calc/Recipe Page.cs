@@ -81,7 +81,7 @@ namespace Homebrew_Recipe_Calc
                     cboGrain3.Items.Add(reader["Grain"].ToString());
                     cboGrain4.Items.Add(reader["Grain"].ToString());
                     cboGrain5.Items.Add(reader["Grain"].ToString());
-                    cboGrain6.Items.Add(reader["Grain"].ToString()); 
+                    cboGrain6.Items.Add(reader["Grain"].ToString());
                     cboGrain7.Items.Add(reader["Grain"].ToString());
                     cboGrain8.Items.Add(reader["Grain"].ToString());
                     cboGrain9.Items.Add(reader["Grain"].ToString());
@@ -118,7 +118,7 @@ namespace Homebrew_Recipe_Calc
             lblPercent3.Text = "0.00";
             lblPercent4.Text = "0.00";
             lblPercent5.Text = "0.00";
-            lblPercent6.Text = "0.00"; 
+            lblPercent6.Text = "0.00";
             lblPercent7.Text = "0.00";
             lblPercent8.Text = "0.00";
             lblPercent9.Text = "0.00";
@@ -328,7 +328,7 @@ namespace Homebrew_Recipe_Calc
 
         private void txtYeastFactor_TextChanged(object sender, EventArgs e)
         {
-           yeastFact[0] = double.Parse(txtYeastFactor.Text);
+            yeastFact[0] = double.Parse(txtYeastFactor.Text);
 
         }
 
@@ -340,11 +340,9 @@ namespace Homebrew_Recipe_Calc
 
         private void aBVCalculatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            //ABV_Calc ABVForm = new ABV_Calc;
-                //designRecipe designRecipe = new designRecipe(beerName.Text);
-            //designRecipe.Show();
-           
+            calcABV ABVC = new calcABV();
+            ABVC.Show();
+
         }
     }
 }

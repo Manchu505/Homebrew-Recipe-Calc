@@ -16,7 +16,7 @@ namespace Homebrew_Recipe_Calc
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmRecipe());
+            Application.Run(new splashScreen());
         }
     }
 }

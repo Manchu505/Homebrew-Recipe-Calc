@@ -10,12 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace ABV_Calc
+namespace Homebrew_Recipe_Calc
 {
-
-
-
-
     public partial class calcABV : Form
     {
         // variable used throughout math calculations
@@ -32,14 +28,12 @@ namespace ABV_Calc
         double num11; //Plato Gravity
         double platoOG; //Converted Plato Gravity
         double platoFG; //Converted Plato Gravity
-
-
+    
         public calcABV()
-        {
-            InitializeComponent();
-        }
+        { InitializeComponent(); }
 
-        private void button1_Click_1(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
         {
             //Calculate Button
 
@@ -108,12 +102,12 @@ namespace ABV_Calc
                 label10.Text = sum3.ToString("N2") + ("%");
             }
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
             //Close Button
             this.Close();
         }
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //Clear Button
             inputFG.Clear();
@@ -121,9 +115,6 @@ namespace ABV_Calc
             label10.Text = "";
 
         }
-
-
-
 
     }
 }
