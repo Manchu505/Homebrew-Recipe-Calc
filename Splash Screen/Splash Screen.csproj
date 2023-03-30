@@ -4,29 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1097FF50-C3D6-4750-B355-874CBDDE6406}</ProjectGuid>
+    <ProjectGuid>{6EB41B2C-8FB0-41DC-A579-EE2918471797}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Homebrew_Recipe_Calc</RootNamespace>
-    <AssemblyName>Homebrew Recipe Calc</AssemblyName>
+    <RootNamespace>Splash_Screen</RootNamespace>
+    <AssemblyName>Splash Screen</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,33 +52,22 @@
     <Compile Include="ABV_Calc.designer.cs">
       <DependentUpon>ABV_Calc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Access_ingredientsDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Access_ingredientsDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Recipe Page.cs">
+    <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Recipe Page.Designer.cs">
-      <DependentUpon>Recipe Page.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Splash_Screen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Splash_Screen.Designer.cs">
-      <DependentUpon>Splash_Screen.cs</DependentUpon>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Splash_Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splash_Screen.designer.cs">
+      <DependentUpon>Splash_Screen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ABV_Calc.resx">
       <DependentUpon>ABV_Calc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Recipe Page.resx">
-      <DependentUpon>Recipe Page.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Splash_Screen.resx">
-      <DependentUpon>Splash_Screen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -104,17 +78,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Access_ingredientsDataSet.xsc">
-      <DependentUpon>Access_ingredientsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Access_ingredientsDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Access_ingredientsDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Access_ingredientsDataSet.xss">
-      <DependentUpon>Access_ingredientsDataSet.xsd</DependentUpon>
-    </None>
+    <EmbeddedResource Include="Splash_Screen.resx">
+      <DependentUpon>Splash_Screen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,23 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Access_ingredients.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

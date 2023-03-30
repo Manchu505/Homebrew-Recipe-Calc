@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Homebrew_Recipe_Calc
+namespace Splash_Screen
 {
     internal static class Program
     {
@@ -16,7 +16,7 @@ namespace Homebrew_Recipe_Calc
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmRecipe());
+            Application.Run(new Form2());   
         }
     }
 }
