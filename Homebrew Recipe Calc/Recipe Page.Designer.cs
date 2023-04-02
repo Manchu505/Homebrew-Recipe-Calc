@@ -90,6 +90,14 @@
             this.lblLbGrain7 = new System.Windows.Forms.Label();
             this.lblLbGrain8 = new System.Windows.Forms.Label();
             this.lblLbGrain9 = new System.Windows.Forms.Label();
+            this.lblPPG3 = new System.Windows.Forms.Label();
+            this.lblAttn3 = new System.Windows.Forms.Label();
+            this.lblAff3 = new System.Windows.Forms.Label();
+            this.lblLov3 = new System.Windows.Forms.Label();
+            this.lblDP3 = new System.Windows.Forms.Label();
+            this.lblPoi3 = new System.Windows.Forms.Label();
+            this.lblFer3 = new System.Windows.Forms.Label();
+            this.lblCon3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblDP = new System.Windows.Forms.Label();
@@ -125,10 +133,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtYeastFactor = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.calculatorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aBVCalculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculatorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBVCalculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblWA3 = new System.Windows.Forms.Label();
+            this.lblOGC3 = new System.Windows.Forms.Label();
+            this.lblFGC3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -288,7 +299,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain2, 2, 1);
@@ -348,6 +359,17 @@
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain7, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain8, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain9, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblPPG3, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblAttn3, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblAff3, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblLov3, 7, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblDP3, 8, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblPoi3, 9, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblFer3, 10, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblCon3, 11, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblWA3, 12, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblOGC3, 13, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblFGC3, 14, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(40, 28);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 10;
@@ -649,7 +671,7 @@
             this.cboGrain3.Name = "cboGrain3";
             this.cboGrain3.Size = new System.Drawing.Size(194, 21);
             this.cboGrain3.TabIndex = 5;
-            this.cboGrain3.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.cboGrain3.SelectedIndexChanged += new System.EventHandler(this.cboGrain3_SelectedIndexChanged);
             // 
             // txtGrainWT9
             // 
@@ -756,7 +778,7 @@
             this.txtGrainWT3.Name = "txtGrainWT3";
             this.txtGrainWT3.Size = new System.Drawing.Size(59, 20);
             this.txtGrainWT3.TabIndex = 6;
-            this.txtGrainWT3.TextChanged += new System.EventHandler(this.txtGrainWT1_TextChanged_1);
+            this.txtGrainWT3.TextChanged += new System.EventHandler(this.Form1_Load);
             // 
             // txtGrainWT5
             // 
@@ -923,6 +945,86 @@
             this.lblLbGrain9.Size = new System.Drawing.Size(59, 13);
             this.lblLbGrain9.TabIndex = 7;
             this.lblLbGrain9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPPG3
+            // 
+            this.lblPPG3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPPG3.AutoSize = true;
+            this.lblPPG3.Location = new System.Drawing.Point(403, 71);
+            this.lblPPG3.Name = "lblPPG3";
+            this.lblPPG3.Size = new System.Drawing.Size(59, 13);
+            this.lblPPG3.TabIndex = 9;
+            this.lblPPG3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAttn3
+            // 
+            this.lblAttn3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAttn3.AutoSize = true;
+            this.lblAttn3.Location = new System.Drawing.Point(469, 71);
+            this.lblAttn3.Name = "lblAttn3";
+            this.lblAttn3.Size = new System.Drawing.Size(59, 13);
+            this.lblAttn3.TabIndex = 7;
+            this.lblAttn3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblAff3
+            // 
+            this.lblAff3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAff3.AutoSize = true;
+            this.lblAff3.Location = new System.Drawing.Point(535, 71);
+            this.lblAff3.Name = "lblAff3";
+            this.lblAff3.Size = new System.Drawing.Size(59, 13);
+            this.lblAff3.TabIndex = 7;
+            this.lblAff3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblLov3
+            // 
+            this.lblLov3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLov3.AutoSize = true;
+            this.lblLov3.Location = new System.Drawing.Point(601, 71);
+            this.lblLov3.Name = "lblLov3";
+            this.lblLov3.Size = new System.Drawing.Size(59, 13);
+            this.lblLov3.TabIndex = 7;
+            this.lblLov3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDP3
+            // 
+            this.lblDP3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDP3.AutoSize = true;
+            this.lblDP3.Location = new System.Drawing.Point(667, 71);
+            this.lblDP3.Name = "lblDP3";
+            this.lblDP3.Size = new System.Drawing.Size(59, 13);
+            this.lblDP3.TabIndex = 7;
+            this.lblDP3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblPoi3
+            // 
+            this.lblPoi3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPoi3.AutoSize = true;
+            this.lblPoi3.Location = new System.Drawing.Point(733, 71);
+            this.lblPoi3.Name = "lblPoi3";
+            this.lblPoi3.Size = new System.Drawing.Size(59, 13);
+            this.lblPoi3.TabIndex = 7;
+            this.lblPoi3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFer3
+            // 
+            this.lblFer3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFer3.AutoSize = true;
+            this.lblFer3.Location = new System.Drawing.Point(799, 71);
+            this.lblFer3.Name = "lblFer3";
+            this.lblFer3.Size = new System.Drawing.Size(59, 13);
+            this.lblFer3.TabIndex = 7;
+            this.lblFer3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCon3
+            // 
+            this.lblCon3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCon3.AutoSize = true;
+            this.lblCon3.Location = new System.Drawing.Point(865, 71);
+            this.lblCon3.Name = "lblCon3";
+            this.lblCon3.Size = new System.Drawing.Size(59, 13);
+            this.lblCon3.TabIndex = 7;
+            this.lblCon3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -1295,21 +1397,6 @@
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // calculatorsToolStripMenuItem
-            // 
-            this.calculatorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aBVCalculatorToolStripMenuItem});
-            this.calculatorsToolStripMenuItem.Name = "calculatorsToolStripMenuItem";
-            this.calculatorsToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.calculatorsToolStripMenuItem.Text = "Calculators";
-            // 
-            // aBVCalculatorToolStripMenuItem
-            // 
-            this.aBVCalculatorToolStripMenuItem.Name = "aBVCalculatorToolStripMenuItem";
-            this.aBVCalculatorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aBVCalculatorToolStripMenuItem.Text = "ABV Calculator";
-            this.aBVCalculatorToolStripMenuItem.Click += new System.EventHandler(this.aBVCalculatorToolStripMenuItem_Click);
-            // 
             // menuToolStripMenuItem
             // 
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1321,9 +1408,54 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // calculatorsToolStripMenuItem
+            // 
+            this.calculatorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aBVCalculatorToolStripMenuItem});
+            this.calculatorsToolStripMenuItem.Name = "calculatorsToolStripMenuItem";
+            this.calculatorsToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.calculatorsToolStripMenuItem.Text = "Calculators";
+            // 
+            // aBVCalculatorToolStripMenuItem
+            // 
+            this.aBVCalculatorToolStripMenuItem.Name = "aBVCalculatorToolStripMenuItem";
+            this.aBVCalculatorToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.aBVCalculatorToolStripMenuItem.Text = "ABV Calculator";
+            this.aBVCalculatorToolStripMenuItem.Click += new System.EventHandler(this.aBVCalculatorToolStripMenuItem_Click);
+            // 
+            // lblWA3
+            // 
+            this.lblWA3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWA3.AutoSize = true;
+            this.lblWA3.Location = new System.Drawing.Point(931, 71);
+            this.lblWA3.Name = "lblWA3";
+            this.lblWA3.Size = new System.Drawing.Size(59, 13);
+            this.lblWA3.TabIndex = 7;
+            this.lblWA3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblOGC3
+            // 
+            this.lblOGC3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOGC3.AutoSize = true;
+            this.lblOGC3.Location = new System.Drawing.Point(997, 71);
+            this.lblOGC3.Name = "lblOGC3";
+            this.lblOGC3.Size = new System.Drawing.Size(59, 13);
+            this.lblOGC3.TabIndex = 7;
+            this.lblOGC3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblFGC3
+            // 
+            this.lblFGC3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFGC3.AutoSize = true;
+            this.lblFGC3.Location = new System.Drawing.Point(1063, 71);
+            this.lblFGC3.Name = "lblFGC3";
+            this.lblFGC3.Size = new System.Drawing.Size(59, 13);
+            this.lblFGC3.TabIndex = 7;
+            this.lblFGC3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmRecipe
             // 
@@ -1354,7 +1486,6 @@
             this.Name = "frmRecipe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "509 Recipe Calculator";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -1469,6 +1600,17 @@
         private System.Windows.Forms.ToolStripMenuItem aBVCalculatorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.Label lblPPG3;
+        private System.Windows.Forms.Label lblAttn3;
+        private System.Windows.Forms.Label lblAff3;
+        private System.Windows.Forms.Label lblLov3;
+        private System.Windows.Forms.Label lblDP3;
+        private System.Windows.Forms.Label lblPoi3;
+        private System.Windows.Forms.Label lblFer3;
+        private System.Windows.Forms.Label lblCon3;
+        private System.Windows.Forms.Label lblWA3;
+        private System.Windows.Forms.Label lblOGC3;
+        private System.Windows.Forms.Label lblFGC3;
     }
 }
 

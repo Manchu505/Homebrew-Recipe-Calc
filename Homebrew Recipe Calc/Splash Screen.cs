@@ -17,11 +17,5 @@ namespace Homebrew_Recipe_Calc
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            frmRecipe recipe = new frmRecipe();
-            recipe.ShowDialog();
-            this.Close();
-        }
     }
 }
