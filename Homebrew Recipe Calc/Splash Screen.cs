@@ -17,5 +17,15 @@ namespace Homebrew_Recipe_Calc
             InitializeComponent();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Start();
+            this.Close();
+        }
+
+        private void splashScreen_Load(object sender, EventArgs e)
+        {
+            this.CenterToScreen();
+        }
     }
 }
