@@ -286,6 +286,7 @@ namespace Homebrew_Recipe_Calc
                     }
                 }
             }
+            
             catch (Exception)
             {
                 MessageBox.Show("First Change Box Catch");
@@ -352,7 +353,7 @@ namespace Homebrew_Recipe_Calc
                         FGCon[1] = OGCon[1] - (1 + OGCon[1] - 1) * yeastFact / 100;
                         lblFGC2.Text = FGCon[1].ToString("N3");
                     }
-                
+
             }
             catch (Exception)
             {
@@ -361,7 +362,8 @@ namespace Homebrew_Recipe_Calc
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-           // for (p = 0; p <= 0; p++)
+                
+                // for (p = 0; p <= 0; p++)
             {
              // MessageBox.Show("Loop");
             }
@@ -375,11 +377,6 @@ namespace Homebrew_Recipe_Calc
         {
             //Close Button
             this.Close();
-        }
-
-        private void txtWaterVolume_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void txtYeastFactor_TextChanged(object sender, EventArgs e)
@@ -586,6 +583,8 @@ namespace Homebrew_Recipe_Calc
 
                 waterVol1 = waterToAddFinal / 1000 * .264172;
                 txtWaterToAddGal.Text = waterVol1.ToString("N2");
+
+                
             }
             catch (Exception) { }
         }
