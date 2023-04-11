@@ -72,6 +72,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Access_ingredientsDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Access_ingredientsDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Access_ingredientsDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Splash Screen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +120,17 @@
     </None>
     <None Include="Access_ingredientsDataSet.xss">
       <DependentUpon>Access_ingredientsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Access_ingredientsDataSet1.xsc">
+      <DependentUpon>Access_ingredientsDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Access_ingredientsDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Access_ingredientsDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Access_ingredientsDataSet1.xss">
+      <DependentUpon>Access_ingredientsDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
