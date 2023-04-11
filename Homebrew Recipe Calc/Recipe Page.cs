@@ -72,7 +72,7 @@ namespace Homebrew_Recipe_Calc
                 MessageBox.Show(ex.Message);
             }
         }
-        public void percentChange(object sender)
+        private void percentChange(object sender)
         {
             try
             {
@@ -331,7 +331,7 @@ namespace Homebrew_Recipe_Calc
                     if (grainWt[1] >= .01)
                     {
                         waterAb[1] = double.Parse(waterAbsor[1]);
-                    lblwaterAB[1] = waterAb[1] * grainWt[1];
+                        lblwaterAB[1] = waterAb[1] * grainWt[1];
                         lblWA2.Text = lblwaterAB[1].ToString();
                     }
                     if (lblAff2.Text == "y")
