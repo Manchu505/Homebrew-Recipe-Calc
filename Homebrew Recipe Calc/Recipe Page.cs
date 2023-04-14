@@ -1635,7 +1635,7 @@ namespace Homebrew_Recipe_Calc
         {
 
             double tHopAB = double.Parse(txtHopAB.Text);
-            double waVolume = double.Parse(txtWaterVolume.Text);
+            //double waVolume = double.Parse(txtWaterVolume.Text); }
 
             if (cboHopMin1 != null)
             {
@@ -1665,7 +1665,7 @@ namespace Homebrew_Recipe_Calc
                                 if (string.IsNullOrEmpty(txtAAA1.Text))
                                 {
                                     hopUtil[0] = double.Parse(hoputilization[0]);
-                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double waVolume = double.Parse(txtWaterVolume.Text);
                                     double AAE1 = double.Parse(lblAAE1.Text);
                                     IBU[0] = (hopUtil[0] * (AAE1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
                                     lblIBU1.Text = IBU[0].ToString("N2");
@@ -1673,7 +1673,7 @@ namespace Homebrew_Recipe_Calc
                                 else
                                 {
                                     hopUtil[0] = double.Parse(hoputilization[0]);
-                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double waVolume = double.Parse(txtWaterVolume.Text);
                                     double AAE1 = double.Parse(lblAAE1.Text);
                                     //double HopAmount1 = double.Parse(txtHopAmt1.Text);
                                     double AAA1 = double.Parse(txtAAA1.Text);
@@ -1744,7 +1744,7 @@ namespace Homebrew_Recipe_Calc
                                 if (string.IsNullOrEmpty(txtAAA2.Text))
                                 {
                                     hopUtil[1] = double.Parse(hoputilization[1]);
-                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double waVolume = double.Parse(txtWaterVolume.Text);
                                     double AAE2 = double.Parse(lblAAE2.Text);
                                     IBU[1] = (hopUtil[1] * (AAE2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
                                     lblIBU2.Text = IBU[1].ToString("N2");
@@ -1752,7 +1752,7 @@ namespace Homebrew_Recipe_Calc
                                 else
                                 {
                                     hopUtil[1] = double.Parse(hoputilization[1]);
-                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double waVolume = double.Parse(txtWaterVolume.Text);
                                     double AAE2 = double.Parse(lblAAE2.Text);
                                     //double HopAmount2 = double.Parse(txtHopAmt2.Text);
                                     double AAA2 = double.Parse(txtAAA1.Text);
@@ -1821,7 +1821,7 @@ namespace Homebrew_Recipe_Calc
                                 if (string.IsNullOrEmpty(txtAAA3.Text))
                                 {
                                     double hopUtil = double.Parse(hoputilization[2]);
-                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double waVolume = double.Parse(txtWaterVolume.Text);
                                     double AAE3 = double.Parse(lblAAE3.Text);
                                     IBU[2] = (hopUtil * (AAE3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
                                     lblIBU3.Text = IBU[2].ToString("N2");
@@ -1829,7 +1829,7 @@ namespace Homebrew_Recipe_Calc
                                 else
                                 {
                                     double hopUtil = double.Parse(hoputilization[2]);
-                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double waVolume = double.Parse(txtWaterVolume.Text);
                                     double AAE3 = double.Parse(lblAAE3.Text);
                                     //double HopAmount3 = double.Parse(txtHopAmt3.Text);
                                     double AAA3 = double.Parse(txtAAA3.Text);
@@ -1896,7 +1896,7 @@ namespace Homebrew_Recipe_Calc
                                     if (string.IsNullOrEmpty(txtAAA4.Text))
                                     {
                                         double hopUtil = double.Parse(hoputilization[3]);
-                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double waVolume = double.Parse(txtWaterVolume.Text);
                                         double AAE4 = double.Parse(lblAAE4.Text);
                                         IBU[3] = (hopUtil * (AAE4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
                                         lblIBU4.Text = IBU[3].ToString("N2");
@@ -1904,7 +1904,7 @@ namespace Homebrew_Recipe_Calc
                                     else
                                     {
                                         double hopUtil = double.Parse(hoputilization[3]);
-                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double waVolume = double.Parse(txtWaterVolume.Text);
                                         double AAE4 = double.Parse(lblAAE4.Text);
                                         //double HopAmount4 = double.Parse(txtHopAmt4.Text);
                                         double AAA4 = double.Parse(txtAAA4.Text);
@@ -1971,7 +1971,7 @@ namespace Homebrew_Recipe_Calc
                                     if (string.IsNullOrEmpty(txtAAA5.Text))
                                     {
                                         double hopUtil = double.Parse(hoputilization[4]);
-                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double waVolume = double.Parse(txtWaterVolume.Text);
                                         double AAE5 = double.Parse(lblAAE5.Text);
                                         IBU[4] = (hopUtil * (AAE5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
                                         lblIBU5.Text = IBU[4].ToString("N2");
@@ -1979,7 +1979,7 @@ namespace Homebrew_Recipe_Calc
                                     else
                                     {
                                         double hopUtil = double.Parse(hoputilization[4]);
-                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double waVolume = double.Parse(txtWaterVolume.Text);
                                         double AAE5 = double.Parse(lblAAE5.Text);
                                         //double HopAmount5 = double.Parse(txtHopAmt5.Text);
                                         double AAA5 = double.Parse(txtAAA5.Text);
@@ -2028,236 +2028,6 @@ namespace Homebrew_Recipe_Calc
                 }
 
             }
-        }
-        private void ibuCalculator(object sender)
-        {
-            //if (txtHopAB.Text == "") //string.IsNullOrEmpty(txtHopAB.Text))
-            {
-                //txtHopAB.Text = "5";
-
-                double tHopAB = double.Parse(txtHopAB.Text);
-                double waVolume = double.Parse(txtWaterVolume.Text);
-
-                /*try
-                {
-                    if (txtHopAmt1.Text.Length > 0)
-                    {
-                        double HopAmount1 = double.Parse(txtHopAmt1.Text);
-
-                        if (string.IsNullOrEmpty(txtAAA1.Text))
-                        {
-                            hopUtil[0] = double.Parse(hoputilization[0]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE1 = double.Parse(lblAAE1.Text);
-                            IBU[0] = (hopUtil[0] * (AAE1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
-                            lblIBU1.Text = IBU[0].ToString("N2");
-                        }
-                        else
-                        {
-                            hopUtil[0] = double.Parse(hoputilization[0]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE1 = double.Parse(lblAAE1.Text);
-                            //double HopAmount1 = double.Parse(txtHopAmt1.Text);
-                            double AAA1 = double.Parse(txtAAA1.Text);
-                            IBU[0] = (hopUtil[0] * (AAA1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
-                            lblIBU1.Text = IBU[0].ToString("N2");
-                        }
-                        hopAB[0] = HopAmount1 * tHopAB;
-                        lblHopWA1.Text = hopAB[0].ToString("");
-
-                    }
-                    else
-                    {
-                        //lblIBU1.Text = "0";
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("IBU1 Calculator");
-                }
-                try
-                {
-                    if (txtHopAmt2.Text.Length > 0)
-                    {
-                        double HopAmount2 = double.Parse(txtHopAmt2.Text);
-
-                        if (string.IsNullOrEmpty(txtAAA2.Text))
-                        {
-                            hopUtil[1] = double.Parse(hoputilization[1]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE2 = double.Parse(lblAAE2.Text);
-                            IBU[1] = (hopUtil[1] * (AAE2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
-                            lblIBU2.Text = IBU[1].ToString("N2");
-                        }
-                        else
-                        {
-                            hopUtil[1] = double.Parse(hoputilization[1]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE2 = double.Parse(lblAAE2.Text);
-                            //double HopAmount2 = double.Parse(txtHopAmt2.Text);
-                            double AAA2 = double.Parse(txtAAA1.Text);
-                            IBU[1] = (hopUtil[1] * (AAA2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
-                            lblIBU2.Text = IBU[1].ToString("N2");
-                        }
-                        hopAB[1] = HopAmount2 * tHopAB;
-                        lblHopWA2.Text = hopAB[1].ToString("");
-
-                    }
-                    else
-                    {
-                        //lblIBU2.Text = "0";
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("IBU2 Calculator");
-                }
-                try
-                {
-                    if (txtHopAmt3.Text.Length > 0)
-                    {
-                        double HopAmount3 = double.Parse(txtHopAmt3.Text);
-
-                        if (string.IsNullOrEmpty(txtAAA3.Text))
-                        {
-                            double hopUtil = double.Parse(hoputilization[2]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE3 = double.Parse(lblAAE3.Text);
-                            IBU[2] = (hopUtil * (AAE3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
-                            lblIBU3.Text = IBU[2].ToString("N2");
-                        }
-                        else
-                        {
-                            double hopUtil = double.Parse(hoputilization[2]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE3 = double.Parse(lblAAE3.Text);
-                            //double HopAmount3 = double.Parse(txtHopAmt3.Text);
-                            double AAA3 = double.Parse(txtAAA3.Text);
-                            IBU[2] = (hopUtil * (AAA3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
-                            lblIBU3.Text = IBU[2].ToString("N2");
-                        }
-                        hopAB[2] = HopAmount3 * tHopAB;
-                        lblHopWA3.Text = hopAB[2].ToString("");
-
-                    }
-                    else
-                    {
-                        //lblIBU3.Text = "0";
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("IBU3 Calculator");
-                }
-                try
-                {
-                    if (txtHopAmt4.Text.Length > 0)
-                    {
-                        double HopAmount4 = double.Parse(txtHopAmt4.Text);
-
-                        if (string.IsNullOrEmpty(txtAAA4.Text))
-                        {
-                            double hopUtil = double.Parse(hoputilization[3]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE4 = double.Parse(lblAAE4.Text);
-                            IBU[3] = (hopUtil * (AAE4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
-                            lblIBU4.Text = IBU[3].ToString("N2");
-                        }
-                        else
-                        {
-                            double hopUtil = double.Parse(hoputilization[3]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE4 = double.Parse(lblAAE4.Text);
-                            //double HopAmount4 = double.Parse(txtHopAmt4.Text);
-                            double AAA4 = double.Parse(txtAAA4.Text);
-                            IBU[3] = (hopUtil * (AAA4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
-                            lblIBU4.Text = IBU[3].ToString("N2");
-                        }
-                        hopAB[3] = HopAmount4 * tHopAB;
-                        lblHopWA4.Text = hopAB[3].ToString("");
-
-                    }
-                    else
-                    {
-                        //lblIBU4.Text = "0";
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("IBU4 Calculator");
-                }
-                try
-                {
-                    if (txtHopAmt5.Text.Length > 0)
-                    {
-                        double HopAmount5 = double.Parse(txtHopAmt5.Text);
-
-                        if (string.IsNullOrEmpty(txtAAA5.Text))
-                        {
-                            double hopUtil = double.Parse(hoputilization[4]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE5 = double.Parse(lblAAE5.Text);
-                            IBU[4] = (hopUtil * (AAE5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
-                            lblIBU5.Text = IBU[4].ToString("N2");
-                        }
-                        else
-                        {
-                            double hopUtil = double.Parse(hoputilization[4]);
-                            //double waVolume = double.Parse(txtWaterVolume.Text);
-                            double AAE5 = double.Parse(lblAAE5.Text);
-                            //double HopAmount5 = double.Parse(txtHopAmt5.Text);
-                            double AAA5 = double.Parse(txtAAA5.Text);
-                            IBU[4] = (hopUtil * (AAA5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
-                            lblIBU5.Text = IBU[4].ToString("N2");
-                        }
-                        hopAB[4] = HopAmount5 * tHopAB;
-                        lblHopWA5.Text = hopAB[4].ToString("");
-
-                    }
-                    else
-                    {
-                        //lblIBU5.Text = "0";
-                    }
-                }
-
-                catch (Exception)
-                {
-                    MessageBox.Show("IBU5 Calculator");
-                }*/
-            }
-            //else
-            {
-                //txtHopAB.Text = "5";
-            }
-        }
-
-        private void txtHopAmt1_TextChanged(object sender, EventArgs e)
-        {
-            hopDataChange(txtHopAmt1);
-        }
-
-        private void txtHopAmt2_TextChanged(object sender, EventArgs e)
-        {
-            hopDataChange(txtHopAmt2);
-
-        }
-
-        private void txtHopAmt3_TextChanged(object sender, EventArgs e)
-        {
-            hopDataChange(txtHopAmt3);
-
-        }
-
-        private void txtHopAmt4_TextChanged(object sender, EventArgs e)
-        {
-            hopDataChange(txtHopAmt4);
-
-        }
-
-        private void txtHopAmt5_TextChanged(object sender, EventArgs e)
-        {
-            hopDataChange(txtHopAmt5);
-
         }
     }
 }
