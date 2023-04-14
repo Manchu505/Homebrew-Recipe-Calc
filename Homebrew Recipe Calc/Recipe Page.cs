@@ -30,7 +30,7 @@ namespace Homebrew_Recipe_Calc
         double[] lblwaterAB = new double[9];
         double[] IBU = new double[9];
         string[] hoputilization = new string[9];
-        //double[] hopUtil = new double[9];
+        double[] hopUtil = new double[9];
         OleDbConnection conn;
         OleDbCommand command;
 
@@ -133,58 +133,65 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[0] = double.Parse(txtGrainWT1.Text);
-                if (grainWt[0] >= .01)
+                if (grainWt[0] != 0)
                 {
                     percent[0] = grainWt[0] / grainWt.Sum();
                     lblPercent1.Text = percent[0].ToString("P2");
                 }
-                if (grainWt[1] >= .01)
+                if (grainWt[1] != 0)
                 {
                     percent[1] = grainWt[1] / grainWt.Sum();
                     lblPercent2.Text = percent[1].ToString("P2");
                 }
-                if (grainWt[2] >= .01)
+
+                if (grainWt[2] != 0)
                 {
                     percent[2] = grainWt[2] / grainWt.Sum();
                     lblPercent3.Text = percent[2].ToString("P2");
                 }
-                if (grainWt[3] >= .01)
+
+                if (grainWt[3] != 0)
                 {
                     percent[3] = grainWt[3] / grainWt.Sum();
                     lblPercent4.Text = percent[3].ToString("P2");
                 }
-                if (grainWt[4] >= .01)
+
+                if (grainWt[4] != 0)
                 {
                     percent[4] = grainWt[4] / grainWt.Sum();
                     lblPercent5.Text = percent[4].ToString("P2");
                 }
-                if (grainWt[5] >= .01)
+
+                if (grainWt[5] != 0)
                 {
                     percent[5] = grainWt[5] / grainWt.Sum();
                     lblPercent6.Text = percent[5].ToString("P2");
                 }
-                if (grainWt[6] >= .01)
+
+                if (grainWt[6] != 0)
                 {
                     percent[6] = grainWt[6] / grainWt.Sum();
                     lblPercent7.Text = percent[6].ToString("P2");
                 }
-                if (grainWt[7] >= .01)
+
+                if (grainWt[7] != 0)
                 {
                     percent[7] = grainWt[7] / grainWt.Sum();
                     lblPercent8.Text = percent[7].ToString("P2");
                 }
-                if (grainWt[8] >= .01)
+
+                if (grainWt[8] != 0)
                 {
                     percent[8] = grainWt[8] / grainWt.Sum();
                     lblPercent9.Text = percent[8].ToString("P2");
                 }
+
                 Efficiency = Efficiency1 + Efficiency2 * grainWt.Sum();
                 txtPreEff.Text = Efficiency.ToString("P0");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Percent Change Error");
             }
         }
         private void lstYeast_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,7 +218,7 @@ namespace Homebrew_Recipe_Calc
                 conn.Close();
             }
         }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboGrain1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -242,7 +249,7 @@ namespace Homebrew_Recipe_Calc
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboGrain2_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -468,6 +475,38 @@ namespace Homebrew_Recipe_Calc
 
         private void cboGrain9_SelectedIndexChanged(object sender, EventArgs e)
         {
+            grainDataChange(cboGrain9);
+            /*try
+        {
+            conn.Open();
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = conn;
+            string query = "select * from GRAINLOOKUP where Grain='" + cboGrain9.Text + "'";
+            command.CommandText = query;
+
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                lblPPG9.Text = reader["PPG"].ToString();
+                lblAttn9.Text = reader["Basic Attenuation"].ToString();
+                lblAff9.Text = reader["Attenuation Affected by Mash Cond?"].ToString();
+                lblLov9.Text = reader["Lovibond"].ToString();
+                lblDP9.Text = reader["DP"].ToString();
+                lblWA9.Text = reader["Absorption (ml/g)"].ToString();
+                waterAbsor[8] = reader["Absorption (ml/g)"].ToString();
+            }
+            conn.Close();
+            txtGrainWT9.Text = grainWt[8].ToString("0");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+            conn.Close();
+
+        }*/
+        }
+        private void grainDataChange(object sender)
+        {
             try
             {
                 conn.Open();
@@ -497,208 +536,235 @@ namespace Homebrew_Recipe_Calc
 
             }
         }
+
         private void grainWt0(object sender)
         {
             try
             {
-                grainWt[0] = double.Parse(txtGrainWT1.Text);
-                if (grainWt[0] > 0.01)
+                if (cboGrain1 != null)
                 {
-                    percentChange(percent[0]);
+                    grainWt[0] = double.Parse(txtGrainWT1.Text);
+                    if (grainWt[0] > 0.01)
+                    {
+                        percentChange(percent[0]);
 
-                    Lbs[0] = grainWt[0] / 1000 * 2.20462;
-                    lblLbGrain1.Text = Lbs[0].ToString("N2");
+                        Lbs[0] = grainWt[0] / 1000 * 2.20462;
+                        lblLbGrain1.Text = Lbs[0].ToString("N2");
 
-                    if (Lbs[0] >= .01)
-                    {
-                        PPG[0] = double.Parse(lblPPG1.Text);
-                        points[0] = PPG[0] * Lbs[0];
-                        lblPoi1.Text = points[0].ToString("N1");
-                    }
-                    if (grainWt[0] >= .01)
-                    {
-                        Attn[0] = double.Parse(lblAttn1.Text);
-                        ferment[0] = (Attn[0] / .83) * (points[0] / points.Sum());
-                        lblFer1.Text = ferment[0].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer1.Text = "0.0";
-                    }
-                    if (grainWt[0] >= .01)
-                    {
-                        Lov[0] = double.Parse(lblLov1.Text);
-                        contribution[0] = 1.49 * Math.Pow((Lov[0] * Lbs[0] / waterVol1), .69);
-                        lblCon1.Text = contribution[0].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon1.Text = "0.0";
-                    }
-                    if (grainWt[0] >= .01)
-                    {
-                        waterAb[0] = double.Parse(waterAbsor[0]);
-                        lblwaterAB[0] = waterAb[0] * grainWt[0];
-                        lblWA1.Text = lblwaterAB[0].ToString();
-                    }
-                    if (lblAff1.Text == "y")
-                    {
-                        OGCon[0] = ((points[0] * Efficiency) / waterVol2) / 1000;
-                        lblOGC1.Text = OGCon[0].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[0] = ((points[0] + Efficiency) / waterVol2) / 1000;
-                        lblOGC1.Text = OGCon[0].ToString("N3");
-                    }
-                    if (Attn[0] == 0)
-                    {
-                        lblFGC1.Text = OGCon[0].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[0] = OGCon[0] - (1 + OGCon[0] - 1) * yeastFact / 100;
-                        lblFGC1.Text = FGCon[0].ToString("N3");
+                        if (Lbs[0] >= .01)
+                        {
+                            PPG[0] = double.Parse(lblPPG1.Text);
+                            points[0] = PPG[0] * Lbs[0];
+                            lblPoi1.Text = points[0].ToString("N1");
+                        }
+                        if (grainWt[0] >= .01)
+                        {
+                            Attn[0] = double.Parse(lblAttn1.Text);
+                            ferment[0] = (Attn[0] / .83) * (points[0] / points.Sum());
+                            lblFer1.Text = ferment[0].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer1.Text = "0.0";
+                        }
+                        if (grainWt[0] >= .01)
+                        {
+                            Lov[0] = double.Parse(lblLov1.Text);
+                            contribution[0] = 1.49 * Math.Pow((Lov[0] * Lbs[0] / waterVol1), .69);
+                            lblCon1.Text = contribution[0].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon1.Text = "0.0";
+                        }
+                        if (grainWt[0] >= .01)
+                        {
+                            waterAb[0] = double.Parse(waterAbsor[0]);
+                            lblwaterAB[0] = waterAb[0] * grainWt[0];
+                            lblWA1.Text = lblwaterAB[0].ToString();
+                        }
+                        if (lblAff1.Text == "y")
+                        {
+                            OGCon[0] = ((points[0] * Efficiency) / waterVol2) / 1000;
+                            lblOGC1.Text = OGCon[0].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[0] = ((points[0] + Efficiency) / waterVol2) / 1000;
+                            lblOGC1.Text = OGCon[0].ToString("N3");
+                        }
+                        if (Attn[0] == 0)
+                        {
+                            lblFGC1.Text = OGCon[0].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[0] = OGCon[0] - (1 + OGCon[0] - 1) * yeastFact / 100;
+                            lblFGC1.Text = FGCon[0].ToString("N3");
+                        }
                     }
                 }
+                else
+                {
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("First Change Box Catch");
+
             }
         }
         private void grainWt1(object sender)
         {
             try
             {
-                grainWt[1] = double.Parse(txtGrainWT2.Text);
-                if (grainWt[1] > 0.01)
+                if (cboGrain2 != null)
                 {
-                    percentChange(percent[1]);
+                    grainWt[1] = double.Parse(txtGrainWT2.Text);
+                    if (grainWt[1] > 0.01)
+                    {
+                        percentChange(percent[1]);
 
-                    Lbs[1] = grainWt[1] / 1000 * 2.20462;
-                    lblLbGrain2.Text = Lbs[1].ToString("N2");
+                        Lbs[1] = grainWt[1] / 1000 * 2.20462;
+                        lblLbGrain2.Text = Lbs[1].ToString("N2");
 
-                    if (Lbs[1] >= .01)
-                    {
-                        PPG[1] = double.Parse(lblPPG2.Text);
-                        points[1] = PPG[1] * Lbs[1];
-                        lblPoi2.Text = points[1].ToString("N1");
-                    }
-                    if (grainWt[1] >= .01)
-                    {
-                        Attn[1] = double.Parse(lblAttn2.Text);
-                        ferment[1] = (Attn[1] / .83) * (points[1] / points.Sum());
-                        lblFer2.Text = ferment[1].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer2.Text = "0.0";
-                    }
-                    if (grainWt[1] >= .01)
-                    {
-                        Lov[1] = double.Parse(lblLov2.Text);
-                        contribution[1] = 1.49 * Math.Pow((Lov[1] * Lbs[1] / waterVol1), .69);
-                        lblCon2.Text = contribution[1].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon2.Text = "0.0";
-                    }
-                    if (grainWt[1] >= .01)
-                    {
-                        waterAb[1] = double.Parse(waterAbsor[1]);
-                        lblwaterAB[1] = waterAb[1] * grainWt[1];
-                        lblWA2.Text = lblwaterAB[1].ToString();
-                    }
-                    if (lblAff2.Text == "y")
-                    {
-                        OGCon[1] = ((points[1] * Efficiency) / waterVol2) / 1000;
-                        lblOGC2.Text = OGCon[1].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[1] = ((points[1] + Efficiency) / waterVol2) / 1000;
-                        lblOGC2.Text = OGCon[1].ToString("N3");
-                    }
-                    if (Attn[1] == 0)
-                    {
-                        lblFGC2.Text = OGCon[1].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[1] = OGCon[1] - (1 + OGCon[1] - 1) * yeastFact / 100;
-                        lblFGC2.Text = FGCon[1].ToString("N3");
+                        if (Lbs[1] >= .01)
+                        {
+                            PPG[1] = double.Parse(lblPPG2.Text);
+                            points[1] = PPG[1] * Lbs[1];
+                            lblPoi2.Text = points[1].ToString("N1");
+                        }
+                        if (grainWt[1] >= .01)
+                        {
+                            Attn[1] = double.Parse(lblAttn2.Text);
+                            ferment[1] = (Attn[1] / .83) * (points[1] / points.Sum());
+                            lblFer2.Text = ferment[1].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer2.Text = "0.0";
+                        }
+                        if (grainWt[1] >= .01)
+                        {
+                            Lov[1] = double.Parse(lblLov2.Text);
+                            contribution[1] = 1.49 * Math.Pow((Lov[1] * Lbs[1] / waterVol1), .69);
+                            lblCon2.Text = contribution[1].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon2.Text = "0.0";
+                        }
+                        if (grainWt[1] >= .01)
+                        {
+                            waterAb[1] = double.Parse(waterAbsor[1]);
+                            lblwaterAB[1] = waterAb[1] * grainWt[1];
+                            lblWA2.Text = lblwaterAB[1].ToString();
+                        }
+                        if (lblAff2.Text == "y")
+                        {
+                            OGCon[1] = ((points[1] * Efficiency) / waterVol2) / 1000;
+                            lblOGC2.Text = OGCon[1].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[1] = ((points[1] + Efficiency) / waterVol2) / 1000;
+                            lblOGC2.Text = OGCon[1].ToString("N3");
+                        }
+                        if (Attn[1] == 0)
+                        {
+                            lblFGC2.Text = OGCon[1].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[1] = OGCon[1] - (1 + OGCon[1] - 1) * yeastFact / 100;
+                            lblFGC2.Text = FGCon[1].ToString("N3");
+                        }
                     }
                 }
+                else
+                {
+
+                }
             }
-            catch { }
+
+            catch (Exception)
+            {
+                MessageBox.Show("second Change Box Catch");
+
+            }
 
         }
         private void grainWt2(object sender)
         {
             try
             {
-                grainWt[2] = double.Parse(txtGrainWT3.Text);
-                if (grainWt[2] > 0.01)
-
+                if (cboGrain2 != null)
                 {
-                    percentChange(percent[2]);
+                    grainWt[2] = double.Parse(txtGrainWT3.Text);
+                    if (grainWt[2] > 0.01)
 
-                    Lbs[2] = grainWt[2] / 1000 * 2.20462;
-                    lblLbGrain3.Text = Lbs[2].ToString("N2");
+                    {
+                        percentChange(percent[2]);
 
-                    if (Lbs[2] >= .01)
-                    {
-                        PPG[2] = double.Parse(lblPPG3.Text);
-                        points[2] = PPG[2] * Lbs[2];
-                        lblPoi3.Text = points[2].ToString("N1");
+                        Lbs[2] = grainWt[2] / 1000 * 2.20462;
+                        lblLbGrain3.Text = Lbs[2].ToString("N2");
+
+                        if (Lbs[2] >= .01)
+                        {
+                            PPG[2] = double.Parse(lblPPG3.Text);
+                            points[2] = PPG[2] * Lbs[2];
+                            lblPoi3.Text = points[2].ToString("N1");
+                        }
+                        if (grainWt[2] >= .01)
+                        {
+                            Attn[2] = double.Parse(lblAttn3.Text);
+                            ferment[2] = (Attn[2] / .83) * (points[2] / points.Sum());
+                            lblFer3.Text = ferment[2].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer3.Text = "0.0";
+                        }
+                        if (grainWt[2] >= .01)
+                        {
+                            Lov[2] = double.Parse(lblLov3.Text);
+                            contribution[2] = 1.49 * Math.Pow((Lov[2] * Lbs[2] / waterVol1), .69);
+                            lblCon3.Text = contribution[2].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon3.Text = "0.0";
+                        }
+                        if (grainWt[2] >= .01)
+                        {
+                            waterAb[2] = double.Parse(waterAbsor[2]);
+                            lblwaterAB[2] = waterAb[2] * grainWt[2];
+                            lblWA3.Text = lblwaterAB[2].ToString();
+                        }
+                        if (lblAff3.Text == "y")
+                        {
+                            OGCon[2] = ((points[2] * Efficiency) / waterVol2) / 1000;
+                            lblOGC3.Text = OGCon[2].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[2] = ((points[2] + Efficiency) / waterVol2) / 1000;
+                            lblOGC3.Text = OGCon[2].ToString("N3");
+                        }
+                        if (Attn[2] == 0)
+                        {
+                            lblFGC3.Text = OGCon[2].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[2] = OGCon[2] - (1 + OGCon[2] - 1) * yeastFact / 100;
+                            lblFGC3.Text = FGCon[2].ToString("N3");
+                        }
                     }
-                    if (grainWt[2] >= .01)
-                    {
-                        Attn[2] = double.Parse(lblAttn3.Text);
-                        ferment[2] = (Attn[2] / .83) * (points[2] / points.Sum());
-                        lblFer3.Text = ferment[2].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer3.Text = "0.0";
-                    }
-                    if (grainWt[2] >= .01)
-                    {
-                        Lov[2] = double.Parse(lblLov3.Text);
-                        contribution[2] = 1.49 * Math.Pow((Lov[2] * Lbs[2] / waterVol1), .69);
-                        lblCon3.Text = contribution[2].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon3.Text = "0.0";
-                    }
-                    if (grainWt[2] >= .01)
-                    {
-                        waterAb[2] = double.Parse(waterAbsor[2]);
-                        lblwaterAB[2] = waterAb[2] * grainWt[2];
-                        lblWA3.Text = lblwaterAB[2].ToString();
-                    }
-                    if (lblAff3.Text == "y")
-                    {
-                        OGCon[2] = ((points[2] * Efficiency) / waterVol2) / 1000;
-                        lblOGC3.Text = OGCon[2].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[2] = ((points[2] + Efficiency) / waterVol2) / 1000;
-                        lblOGC3.Text = OGCon[2].ToString("N3");
-                    }
-                    if (Attn[2] == 0)
-                    {
-                        lblFGC3.Text = OGCon[2].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[2] = OGCon[2] - (1 + OGCon[2] - 1) * yeastFact / 100;
-                        lblFGC3.Text = FGCon[2].ToString("N3");
-                    }
+                }
+                else
+                {
+
                 }
             }
             catch (Exception)
@@ -710,65 +776,71 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[3] = double.Parse(txtGrainWT4.Text);
-                if (grainWt[3] > 0.01)
+                if (cboGrain3 != null)
                 {
-                    percentChange(percent[3]);
+                    grainWt[3] = double.Parse(txtGrainWT4.Text);
+                    if (grainWt[3] > 0.01)
+                    {
+                        percentChange(percent[3]);
 
-                    Lbs[3] = grainWt[3] / 1000 * 2.20462;
-                    lblLbGrain4.Text = Lbs[3].ToString("N2");
+                        Lbs[3] = grainWt[3] / 1000 * 2.20462;
+                        lblLbGrain4.Text = Lbs[3].ToString("N2");
 
-                    if (Lbs[3] >= .01)
-                    {
-                        PPG[3] = double.Parse(lblPPG4.Text);
-                        points[3] = PPG[3] * Lbs[3];
-                        lblPoi4.Text = points[3].ToString("N1");
+                        if (Lbs[3] >= .01)
+                        {
+                            PPG[3] = double.Parse(lblPPG4.Text);
+                            points[3] = PPG[3] * Lbs[3];
+                            lblPoi4.Text = points[3].ToString("N1");
+                        }
+                        if (grainWt[3] >= .01)
+                        {
+                            Attn[3] = double.Parse(lblAttn4.Text);
+                            ferment[3] = (Attn[3] / .83) * (points[3] / points.Sum());
+                            lblFer4.Text = ferment[3].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer4.Text = "0.0";
+                        }
+                        if (grainWt[3] >= .01)
+                        {
+                            Lov[3] = double.Parse(lblLov4.Text);
+                            contribution[3] = 1.49 * Math.Pow((Lov[3] * Lbs[3] / waterVol1), .69);
+                            lblCon4.Text = contribution[3].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon4.Text = "0.0";
+                        }
+                        if (grainWt[3] >= .01)
+                        {
+                            waterAb[3] = double.Parse(waterAbsor[3]);
+                            lblwaterAB[3] = waterAb[3] * grainWt[3];
+                            lblWA4.Text = lblwaterAB[3].ToString();
+                        }
+                        if (lblAff4.Text == "y")
+                        {
+                            OGCon[3] = ((points[3] * Efficiency) / waterVol2) / 1000;
+                            lblOGC4.Text = OGCon[3].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[3] = ((points[3] + Efficiency) / waterVol2) / 1000;
+                            lblOGC4.Text = OGCon[3].ToString("N3");
+                        }
+                        if (Attn[3] == 0)
+                        {
+                            lblFGC4.Text = OGCon[3].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[3] = OGCon[3] - (1 + OGCon[3] - 1) * yeastFact / 100;
+                            lblFGC4.Text = FGCon[3].ToString("N3");
+                        }
                     }
-                    if (grainWt[3] >= .01)
-                    {
-                        Attn[3] = double.Parse(lblAttn4.Text);
-                        ferment[3] = (Attn[3] / .83) * (points[3] / points.Sum());
-                        lblFer4.Text = ferment[3].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer4.Text = "0.0";
-                    }
-                    if (grainWt[3] >= .01)
-                    {
-                        Lov[3] = double.Parse(lblLov4.Text);
-                        contribution[3] = 1.49 * Math.Pow((Lov[3] * Lbs[3] / waterVol1), .69);
-                        lblCon4.Text = contribution[3].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon4.Text = "0.0";
-                    }
-                    if (grainWt[3] >= .01)
-                    {
-                        waterAb[3] = double.Parse(waterAbsor[3]);
-                        lblwaterAB[3] = waterAb[3] * grainWt[3];
-                        lblWA4.Text = lblwaterAB[3].ToString();
-                    }
-                    if (lblAff4.Text == "y")
-                    {
-                        OGCon[3] = ((points[3] * Efficiency) / waterVol2) / 1000;
-                        lblOGC4.Text = OGCon[3].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[3] = ((points[3] + Efficiency) / waterVol2) / 1000;
-                        lblOGC4.Text = OGCon[3].ToString("N3");
-                    }
-                    if (Attn[3] == 0)
-                    {
-                        lblFGC4.Text = OGCon[3].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[3] = OGCon[3] - (1 + OGCon[3] - 1) * yeastFact / 100;
-                        lblFGC4.Text = FGCon[3].ToString("N3");
-                    }
+                }
+                else
+                {
                 }
             }
             catch (Exception)
@@ -781,65 +853,71 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[4] = double.Parse(txtGrainWT5.Text);
-                if (grainWt[4] > 0.01)
+                if (cboGrain4 != null)
                 {
-                    percentChange(percent[4]);
+                    grainWt[4] = double.Parse(txtGrainWT5.Text);
+                    if (grainWt[4] > 0.01)
+                    {
+                        percentChange(percent[4]);
 
-                    Lbs[4] = grainWt[4] / 1000 * 2.20462;
-                    lblLbGrain5.Text = Lbs[4].ToString("N2");
+                        Lbs[4] = grainWt[4] / 1000 * 2.20462;
+                        lblLbGrain5.Text = Lbs[4].ToString("N2");
 
-                    if (Lbs[4] >= .01)
-                    {
-                        PPG[4] = double.Parse(lblPPG5.Text);
-                        points[4] = PPG[4] * Lbs[4];
-                        lblPoi5.Text = points[4].ToString("N1");
+                        if (Lbs[4] >= .01)
+                        {
+                            PPG[4] = double.Parse(lblPPG5.Text);
+                            points[4] = PPG[4] * Lbs[4];
+                            lblPoi5.Text = points[4].ToString("N1");
+                        }
+                        if (grainWt[4] >= .01)
+                        {
+                            Attn[4] = double.Parse(lblAttn5.Text);
+                            ferment[4] = (Attn[4] / .83) * (points[4] / points.Sum());
+                            lblFer5.Text = ferment[4].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer5.Text = "0.0";
+                        }
+                        if (grainWt[4] >= .01)
+                        {
+                            Lov[4] = double.Parse(lblLov5.Text);
+                            contribution[4] = 1.49 * Math.Pow((Lov[4] * Lbs[4] / waterVol1), .69);
+                            lblCon5.Text = contribution[4].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon5.Text = "0.0";
+                        }
+                        if (grainWt[4] >= .01)
+                        {
+                            waterAb[4] = double.Parse(waterAbsor[4]);
+                            lblwaterAB[4] = waterAb[4] * grainWt[4];
+                            lblWA5.Text = lblwaterAB[4].ToString();
+                        }
+                        if (lblAff5.Text == "y")
+                        {
+                            OGCon[4] = ((points[4] * Efficiency) / waterVol2) / 1000;
+                            lblOGC5.Text = OGCon[4].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[4] = ((points[4] + Efficiency) / waterVol2) / 1000;
+                            lblOGC5.Text = OGCon[4].ToString("N3");
+                        }
+                        if (Attn[4] == 0)
+                        {
+                            lblFGC5.Text = OGCon[4].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[4] = OGCon[4] - (1 + OGCon[4] - 1) * yeastFact / 100;
+                            lblFGC5.Text = FGCon[4].ToString("N3");
+                        }
                     }
-                    if (grainWt[4] >= .01)
-                    {
-                        Attn[4] = double.Parse(lblAttn5.Text);
-                        ferment[4] = (Attn[4] / .83) * (points[4] / points.Sum());
-                        lblFer5.Text = ferment[4].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer5.Text = "0.0";
-                    }
-                    if (grainWt[4] >= .01)
-                    {
-                        Lov[4] = double.Parse(lblLov5.Text);
-                        contribution[4] = 1.49 * Math.Pow((Lov[4] * Lbs[4] / waterVol1), .69);
-                        lblCon5.Text = contribution[4].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon5.Text = "0.0";
-                    }
-                    if (grainWt[4] >= .01)
-                    {
-                        waterAb[4] = double.Parse(waterAbsor[4]);
-                        lblwaterAB[4] = waterAb[4] * grainWt[4];
-                        lblWA5.Text = lblwaterAB[4].ToString();
-                    }
-                    if (lblAff5.Text == "y")
-                    {
-                        OGCon[4] = ((points[4] * Efficiency) / waterVol2) / 1000;
-                        lblOGC5.Text = OGCon[4].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[4] = ((points[4] + Efficiency) / waterVol2) / 1000;
-                        lblOGC5.Text = OGCon[4].ToString("N3");
-                    }
-                    if (Attn[4] == 0)
-                    {
-                        lblFGC5.Text = OGCon[4].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[4] = OGCon[4] - (1 + OGCon[4] - 1) * yeastFact / 100;
-                        lblFGC5.Text = FGCon[4].ToString("N3");
-                    }
+                }
+                else
+                {
                 }
             }
             catch (Exception)
@@ -852,65 +930,71 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[5] = double.Parse(txtGrainWT6.Text);
-                if (grainWt[5] > 0.01)
+                if (cboGrain5 != null)
                 {
-                    percentChange(percent[5]);
+                    grainWt[5] = double.Parse(txtGrainWT6.Text);
+                    if (grainWt[5] > 0.01)
+                    {
+                        percentChange(percent[5]);
 
-                    Lbs[5] = grainWt[5] / 1000 * 2.20462;
-                    lblLbGrain6.Text = Lbs[5].ToString("N2");
+                        Lbs[5] = grainWt[5] / 1000 * 2.20462;
+                        lblLbGrain6.Text = Lbs[5].ToString("N2");
 
-                    if (Lbs[5] >= .01)
-                    {
-                        PPG[5] = double.Parse(lblPPG6.Text);
-                        points[5] = PPG[5] * Lbs[5];
-                        lblPoi6.Text = points[5].ToString("N1");
+                        if (Lbs[5] >= .01)
+                        {
+                            PPG[5] = double.Parse(lblPPG6.Text);
+                            points[5] = PPG[5] * Lbs[5];
+                            lblPoi6.Text = points[5].ToString("N1");
+                        }
+                        if (grainWt[5] >= .01)
+                        {
+                            Attn[5] = double.Parse(lblAttn6.Text);
+                            ferment[5] = (Attn[5] / .83) * (points[5] / points.Sum());
+                            lblFer6.Text = ferment[5].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer6.Text = "0.0";
+                        }
+                        if (grainWt[5] >= .01)
+                        {
+                            Lov[5] = double.Parse(lblLov6.Text);
+                            contribution[5] = 1.49 * Math.Pow((Lov[5] * Lbs[5] / waterVol1), .69);
+                            lblCon6.Text = contribution[5].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon6.Text = "0.0";
+                        }
+                        if (grainWt[5] >= .01)
+                        {
+                            waterAb[5] = double.Parse(waterAbsor[5]);
+                            lblwaterAB[5] = waterAb[5] * grainWt[5];
+                            lblWA6.Text = lblwaterAB[5].ToString();
+                        }
+                        if (lblAff6.Text == "y")
+                        {
+                            OGCon[5] = ((points[5] * Efficiency) / waterVol2) / 1000;
+                            lblOGC6.Text = OGCon[5].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[5] = ((points[5] + Efficiency) / waterVol2) / 1000;
+                            lblOGC6.Text = OGCon[5].ToString("N3");
+                        }
+                        if (Attn[5] == 0)
+                        {
+                            lblFGC6.Text = OGCon[5].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[5] = OGCon[5] - (1 + OGCon[5] - 1) * yeastFact / 100;
+                            lblFGC6.Text = FGCon[5].ToString("N3");
+                        }
                     }
-                    if (grainWt[5] >= .01)
-                    {
-                        Attn[5] = double.Parse(lblAttn6.Text);
-                        ferment[5] = (Attn[5] / .83) * (points[5] / points.Sum());
-                        lblFer6.Text = ferment[5].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer6.Text = "0.0";
-                    }
-                    if (grainWt[5] >= .01)
-                    {
-                        Lov[5] = double.Parse(lblLov6.Text);
-                        contribution[5] = 1.49 * Math.Pow((Lov[5] * Lbs[5] / waterVol1), .69);
-                        lblCon6.Text = contribution[5].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon6.Text = "0.0";
-                    }
-                    if (grainWt[5] >= .01)
-                    {
-                        waterAb[5] = double.Parse(waterAbsor[5]);
-                        lblwaterAB[5] = waterAb[5] * grainWt[5];
-                        lblWA6.Text = lblwaterAB[5].ToString();
-                    }
-                    if (lblAff6.Text == "y")
-                    {
-                        OGCon[5] = ((points[5] * Efficiency) / waterVol2) / 1000;
-                        lblOGC6.Text = OGCon[5].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[5] = ((points[5] + Efficiency) / waterVol2) / 1000;
-                        lblOGC6.Text = OGCon[5].ToString("N3");
-                    }
-                    if (Attn[5] == 0)
-                    {
-                        lblFGC6.Text = OGCon[5].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[5] = OGCon[5] - (1 + OGCon[5] - 1) * yeastFact / 100;
-                        lblFGC6.Text = FGCon[5].ToString("N3");
-                    }
+                }
+                else
+                {
                 }
             }
             catch (Exception)
@@ -923,65 +1007,71 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[6] = double.Parse(txtGrainWT7.Text);
-                if (grainWt[6] > 0.01)
+                if (cboGrain6 != null)
                 {
-                    percentChange(percent[6]);
+                    grainWt[6] = double.Parse(txtGrainWT7.Text);
+                    if (grainWt[6] > 0.01)
+                    {
+                        percentChange(percent[6]);
 
-                    Lbs[6] = grainWt[6] / 1000 * 2.20462;
-                    lblLbGrain7.Text = Lbs[6].ToString("N2");
+                        Lbs[6] = grainWt[6] / 1000 * 2.20462;
+                        lblLbGrain7.Text = Lbs[6].ToString("N2");
 
-                    if (Lbs[6] >= .01)
-                    {
-                        PPG[6] = double.Parse(lblPPG7.Text);
-                        points[6] = PPG[6] * Lbs[6];
-                        lblPoi7.Text = points[6].ToString("N1");
+                        if (Lbs[6] >= .01)
+                        {
+                            PPG[6] = double.Parse(lblPPG7.Text);
+                            points[6] = PPG[6] * Lbs[6];
+                            lblPoi7.Text = points[6].ToString("N1");
+                        }
+                        if (grainWt[6] >= .01)
+                        {
+                            Attn[6] = double.Parse(lblAttn7.Text);
+                            ferment[6] = (Attn[6] / .83) * (points[6] / points.Sum());
+                            lblFer7.Text = ferment[6].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer7.Text = "0.0";
+                        }
+                        if (grainWt[6] >= .01)
+                        {
+                            Lov[6] = double.Parse(lblLov7.Text);
+                            contribution[6] = 1.49 * Math.Pow((Lov[6] * Lbs[6] / waterVol1), .69);
+                            lblCon7.Text = contribution[6].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon7.Text = "0.0";
+                        }
+                        if (grainWt[6] >= .01)
+                        {
+                            waterAb[6] = double.Parse(waterAbsor[6]);
+                            lblwaterAB[6] = waterAb[6] * grainWt[6];
+                            lblWA7.Text = lblwaterAB[6].ToString();
+                        }
+                        if (lblAff7.Text == "y")
+                        {
+                            OGCon[6] = ((points[6] * Efficiency) / waterVol2) / 1000;
+                            lblOGC7.Text = OGCon[6].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[6] = ((points[6] + Efficiency) / waterVol2) / 1000;
+                            lblOGC7.Text = OGCon[6].ToString("N3");
+                        }
+                        if (Attn[6] == 0)
+                        {
+                            lblFGC7.Text = OGCon[6].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[6] = OGCon[6] - (1 + OGCon[6] - 1) * yeastFact / 100;
+                            lblFGC7.Text = FGCon[6].ToString("N3");
+                        }
                     }
-                    if (grainWt[6] >= .01)
-                    {
-                        Attn[6] = double.Parse(lblAttn7.Text);
-                        ferment[6] = (Attn[6] / .83) * (points[6] / points.Sum());
-                        lblFer7.Text = ferment[6].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer7.Text = "0.0";
-                    }
-                    if (grainWt[6] >= .01)
-                    {
-                        Lov[6] = double.Parse(lblLov7.Text);
-                        contribution[6] = 1.49 * Math.Pow((Lov[6] * Lbs[6] / waterVol1), .69);
-                        lblCon7.Text = contribution[6].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon7.Text = "0.0";
-                    }
-                    if (grainWt[6] >= .01)
-                    {
-                        waterAb[6] = double.Parse(waterAbsor[6]);
-                        lblwaterAB[6] = waterAb[6] * grainWt[6];
-                        lblWA7.Text = lblwaterAB[6].ToString();
-                    }
-                    if (lblAff7.Text == "y")
-                    {
-                        OGCon[6] = ((points[6] * Efficiency) / waterVol2) / 1000;
-                        lblOGC7.Text = OGCon[6].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[6] = ((points[6] + Efficiency) / waterVol2) / 1000;
-                        lblOGC7.Text = OGCon[6].ToString("N3");
-                    }
-                    if (Attn[6] == 0)
-                    {
-                        lblFGC7.Text = OGCon[6].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[6] = OGCon[6] - (1 + OGCon[6] - 1) * yeastFact / 100;
-                        lblFGC7.Text = FGCon[6].ToString("N3");
-                    }
+                }
+                else
+                {
                 }
             }
             catch (Exception)
@@ -994,65 +1084,72 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[7] = double.Parse(txtGrainWT8.Text);
-                if (grainWt[7] > 0.01)
+                if (cboGrain7 != null)
                 {
-                    percentChange(percent[7]);
+                    grainWt[7] = double.Parse(txtGrainWT8.Text);
+                    if (grainWt[7] > 0.01)
+                    {
+                        percentChange(percent[7]);
 
-                    Lbs[7] = grainWt[7] / 1000 * 2.20462;
-                    lblLbGrain8.Text = Lbs[7].ToString("N2");
+                        Lbs[7] = grainWt[7] / 1000 * 2.20462;
+                        lblLbGrain8.Text = Lbs[7].ToString("N2");
 
-                    if (Lbs[7] >= .01)
-                    {
-                        PPG[7] = double.Parse(lblPPG8.Text);
-                        points[7] = PPG[7] * Lbs[7];
-                        lblPoi8.Text = points[7].ToString("N1");
+                        if (Lbs[7] >= .01)
+                        {
+                            PPG[7] = double.Parse(lblPPG8.Text);
+                            points[7] = PPG[7] * Lbs[7];
+                            lblPoi8.Text = points[7].ToString("N1");
+                        }
+                        if (grainWt[7] >= .01)
+                        {
+                            Attn[7] = double.Parse(lblAttn8.Text);
+                            ferment[7] = (Attn[7] / .83) * (points[7] / points.Sum());
+                            lblFer8.Text = ferment[7].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer8.Text = "0.0";
+                        }
+                        if (grainWt[7] >= .01)
+                        {
+                            Lov[7] = double.Parse(lblLov8.Text);
+                            contribution[7] = 1.49 * Math.Pow((Lov[7] * Lbs[7] / waterVol1), .69);
+                            lblCon8.Text = contribution[7].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon8.Text = "0.0";
+                        }
+                        if (grainWt[7] >= .01)
+                        {
+                            waterAb[7] = double.Parse(waterAbsor[7]);
+                            lblwaterAB[7] = waterAb[7] * grainWt[7];
+                            lblWA8.Text = lblwaterAB[7].ToString();
+                        }
+                        if (lblAff8.Text == "y")
+                        {
+                            OGCon[7] = ((points[7] * Efficiency) / waterVol2) / 1000;
+                            lblOGC8.Text = OGCon[7].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[7] = ((points[7] + Efficiency) / waterVol2) / 1000;
+                            lblOGC8.Text = OGCon[7].ToString("N3");
+                        }
+                        if (Attn[7] == 0)
+                        {
+                            lblFGC8.Text = OGCon[7].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[7] = OGCon[7] - (1 + OGCon[7] - 1) * yeastFact / 100;
+                            lblFGC8.Text = FGCon[7].ToString("N3");
+                        }
                     }
-                    if (grainWt[7] >= .01)
-                    {
-                        Attn[7] = double.Parse(lblAttn8.Text);
-                        ferment[7] = (Attn[7] / .83) * (points[7] / points.Sum());
-                        lblFer8.Text = ferment[7].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer8.Text = "0.0";
-                    }
-                    if (grainWt[7] >= .01)
-                    {
-                        Lov[7] = double.Parse(lblLov8.Text);
-                        contribution[7] = 1.49 * Math.Pow((Lov[7] * Lbs[7] / waterVol1), .69);
-                        lblCon8.Text = contribution[7].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon8.Text = "0.0";
-                    }
-                    if (grainWt[7] >= .01)
-                    {
-                        waterAb[7] = double.Parse(waterAbsor[7]);
-                        lblwaterAB[7] = waterAb[7] * grainWt[7];
-                        lblWA8.Text = lblwaterAB[7].ToString();
-                    }
-                    if (lblAff8.Text == "y")
-                    {
-                        OGCon[7] = ((points[7] * Efficiency) / waterVol2) / 1000;
-                        lblOGC8.Text = OGCon[7].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[7] = ((points[7] + Efficiency) / waterVol2) / 1000;
-                        lblOGC8.Text = OGCon[7].ToString("N3");
-                    }
-                    if (Attn[7] == 0)
-                    {
-                        lblFGC8.Text = OGCon[7].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[7] = OGCon[7] - (1 + OGCon[7] - 1) * yeastFact / 100;
-                        lblFGC8.Text = FGCon[7].ToString("N3");
-                    }
+                }
+                else
+                {
+
                 }
             }
             catch (Exception)
@@ -1065,65 +1162,72 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                grainWt[8] = double.Parse(txtGrainWT9.Text);
-                if (grainWt[8] > 0.01)
+                if (cboGrain8 != null)
                 {
-                    percentChange(percent[8]);
+                    grainWt[8] = double.Parse(txtGrainWT9.Text);
+                    if (grainWt[8] > 0.01)
+                    {
+                        percentChange(percent[8]);
 
-                    Lbs[8] = grainWt[8] / 1000 * 2.20462;
-                    lblLbGrain9.Text = Lbs[8].ToString("N2");
+                        Lbs[8] = grainWt[8] / 1000 * 2.20462;
+                        lblLbGrain9.Text = Lbs[8].ToString("N2");
 
-                    if (Lbs[8] >= .01)
-                    {
-                        PPG[8] = double.Parse(lblPPG9.Text);
-                        points[8] = PPG[8] * Lbs[8];
-                        lblPoi9.Text = points[8].ToString("N1");
+                        if (Lbs[8] >= .01)
+                        {
+                            PPG[8] = double.Parse(lblPPG9.Text);
+                            points[8] = PPG[8] * Lbs[8];
+                            lblPoi9.Text = points[8].ToString("N1");
+                        }
+                        if (grainWt[8] >= .01)
+                        {
+                            Attn[8] = double.Parse(lblAttn9.Text);
+                            ferment[8] = (Attn[8] / .83) * (points[8] / points.Sum());
+                            lblFer9.Text = ferment[8].ToString("N1");
+                        }
+                        else
+                        {
+                            lblFer9.Text = "0.0";
+                        }
+                        if (grainWt[8] >= .01)
+                        {
+                            Lov[8] = double.Parse(lblLov9.Text);
+                            contribution[8] = 1.49 * Math.Pow((Lov[8] * Lbs[8] / waterVol1), .69);
+                            lblCon9.Text = contribution[8].ToString("N1");
+                        }
+                        else
+                        {
+                            lblCon9.Text = "0.0";
+                        }
+                        if (grainWt[8] >= .01)
+                        {
+                            waterAb[8] = double.Parse(waterAbsor[8]);
+                            lblwaterAB[8] = waterAb[8] * grainWt[8];
+                            lblWA9.Text = lblwaterAB[8].ToString();
+                        }
+                        if (lblAff9.Text == "y")
+                        {
+                            OGCon[8] = ((points[8] * Efficiency) / waterVol2) / 1000;
+                            lblOGC9.Text = OGCon[8].ToString("N3");
+                        }
+                        else
+                        {
+                            OGCon[8] = ((points[8] + Efficiency) / waterVol2) / 1000;
+                            lblOGC9.Text = OGCon[8].ToString("N3");
+                        }
+                        if (Attn[8] == 0)
+                        {
+                            lblFGC9.Text = OGCon[8].ToString("N3");
+                        }
+                        else
+                        {
+                            FGCon[8] = OGCon[8] - (1 + OGCon[8] - 1) * yeastFact / 100;
+                            lblFGC9.Text = FGCon[8].ToString("N3");
+                        }
                     }
-                    if (grainWt[8] >= .01)
-                    {
-                        Attn[8] = double.Parse(lblAttn9.Text);
-                        ferment[8] = (Attn[8] / .83) * (points[8] / points.Sum());
-                        lblFer9.Text = ferment[8].ToString("N1");
-                    }
-                    else
-                    {
-                        lblFer9.Text = "0.0";
-                    }
-                    if (grainWt[8] >= .01)
-                    {
-                        Lov[8] = double.Parse(lblLov9.Text);
-                        contribution[8] = 1.49 * Math.Pow((Lov[8] * Lbs[8] / waterVol1), .69);
-                        lblCon9.Text = contribution[8].ToString("N1");
-                    }
-                    else
-                    {
-                        lblCon9.Text = "0.0";
-                    }
-                    if (grainWt[8] >= .01)
-                    {
-                        waterAb[8] = double.Parse(waterAbsor[8]);
-                        lblwaterAB[8] = waterAb[8] * grainWt[8];
-                        lblWA9.Text = lblwaterAB[8].ToString();
-                    }
-                    if (lblAff9.Text == "y")
-                    {
-                        OGCon[8] = ((points[8] * Efficiency) / waterVol2) / 1000;
-                        lblOGC9.Text = OGCon[8].ToString("N3");
-                    }
-                    else
-                    {
-                        OGCon[8] = ((points[8] + Efficiency) / waterVol2) / 1000;
-                        lblOGC9.Text = OGCon[8].ToString("N3");
-                    }
-                    if (Attn[8] == 0)
-                    {
-                        lblFGC9.Text = OGCon[8].ToString("N3");
-                    }
-                    else
-                    {
-                        FGCon[8] = OGCon[8] - (1 + OGCon[8] - 1) * yeastFact / 100;
-                        lblFGC9.Text = FGCon[8].ToString("N3");
-                    }
+                }
+                else
+                {
+
                 }
             }
             catch (Exception)
@@ -1324,7 +1428,8 @@ namespace Homebrew_Recipe_Calc
                 if (txtWaterVolume.Text.Length > 0)
                 {
                     watervolume(txtWaterVolume);
-                    dataChange(txtWaterVolume);
+                    hopDataChange(txtWaterVolume);
+                    txtHopAB.Text = "5";
                 }
                 if (txtGrainWT1.Text.Length > 0)
                 {
@@ -1501,224 +1606,37 @@ namespace Homebrew_Recipe_Calc
                 conn.Close();
             }
         }
-        private void ibuCalculator(object sender)
-        {
-            try
-            {
-                if (txtHopAmt1.Text.Length > 0)
-                {
 
-                    if (string.IsNullOrEmpty(txtAAA1.Text))
-                    {
-                        double hopUtil = double.Parse(hoputilization[0]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE1 = double.Parse(lblAAE1.Text);
-                        double HopAmount1 = double.Parse(txtHopAmt1.Text);
-                        IBU[0] = (hopUtil * (AAE1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
-                        lblIBU1.Text = IBU[0].ToString("N2");
-                    }
-                    else
-                    {
-                        double hopUtil = double.Parse(hoputilization[0]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE1 = double.Parse(lblAAE1.Text);
-                        double HopAmount1 = double.Parse(txtHopAmt1.Text);
-                        double AAA1 = double.Parse(txtAAA1.Text);
-                        IBU[0] = (hopUtil * (AAA1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
-                        lblIBU1.Text = IBU[0].ToString("N2");
-                    }
-                }
-                else
-                {
-                    //lblIBU1.Text = "0";
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("IBU1 Calculator");
-            }
-            try
-            {
-                if (txtHopAmt2.Text.Length > 0)
-                {
-
-                    if (string.IsNullOrEmpty(txtAAA2.Text))
-                    {
-                        double hopUtil = double.Parse(hoputilization[1]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE2 = double.Parse(lblAAE2.Text);
-                        double HopAmount2 = double.Parse(txtHopAmt2.Text);
-                        IBU[1] = (hopUtil * (AAE2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
-                        lblIBU2.Text = IBU[1].ToString("N2");
-                    }
-                    else
-                    {
-                        double hopUtil = double.Parse(hoputilization[1]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE2 = double.Parse(lblAAE2.Text);
-                        double HopAmount2 = double.Parse(txtHopAmt2.Text);
-                        double AAA2 = double.Parse(txtAAA1.Text);
-                        IBU[1] = (hopUtil * (AAA2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
-                        lblIBU2.Text = IBU[1].ToString("N2");
-                    }
-                }
-                else
-                {
-                    //lblIBU2.Text = "0";
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("IBU2 Calculator");
-            }
-            try
-            {
-                if (txtHopAmt3.Text.Length > 0)
-                {
-
-                    if (string.IsNullOrEmpty(txtAAA3.Text))
-                    {
-                        double hopUtil = double.Parse(hoputilization[2]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE3 = double.Parse(lblAAE3.Text);
-                        double HopAmount3 = double.Parse(txtHopAmt3.Text);
-                        IBU[2] = (hopUtil * (AAE3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
-                        lblIBU3.Text = IBU[2].ToString("N2");
-                    }
-                    else
-                    {
-                        double hopUtil = double.Parse(hoputilization[2]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE3 = double.Parse(lblAAE3.Text);
-                        double HopAmount3 = double.Parse(txtHopAmt3.Text);
-                        double AAA3 = double.Parse(txtAAA3.Text);
-                        IBU[2] = (hopUtil * (AAA3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
-                        lblIBU3.Text = IBU[2].ToString("N2");
-                    }
-                }
-                else
-                {
-                    //lblIBU3.Text = "0";
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("IBU3 Calculator");
-            }
-            try
-            {
-                if (txtHopAmt4.Text.Length > 0)
-                {
-
-                    if (string.IsNullOrEmpty(txtAAA4.Text))
-                    {
-                        double hopUtil = double.Parse(hoputilization[3]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE4 = double.Parse(lblAAE4.Text);
-                        double HopAmount4 = double.Parse(txtHopAmt4.Text);
-                        IBU[3] = (hopUtil * (AAE4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
-                        lblIBU4.Text = IBU[3].ToString("N2");
-                    }
-                    else
-                    {
-                        double hopUtil = double.Parse(hoputilization[3]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE4 = double.Parse(lblAAE4.Text);
-                        double HopAmount4 = double.Parse(txtHopAmt4.Text);
-                        double AAA4 = double.Parse(txtAAA4.Text);
-                        IBU[3] = (hopUtil * (AAA4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
-                        lblIBU4.Text = IBU[3].ToString("N2");
-                    }
-                }
-                else
-                {
-                    //lblIBU4.Text = "0";
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("IBU4 Calculator");
-            }
-            try
-            {
-                if (txtHopAmt5.Text.Length > 0)
-                {
-
-                    if (string.IsNullOrEmpty(txtAAA5.Text))
-                    {
-                        double hopUtil = double.Parse(hoputilization[4]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE5 = double.Parse(lblAAE5.Text);
-                        double HopAmount5 = double.Parse(txtHopAmt5.Text);
-                        IBU[4] = (hopUtil * (AAE5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
-                        lblIBU5.Text = IBU[4].ToString("N2");
-                    }
-                    else
-                    {
-                        double hopUtil = double.Parse(hoputilization[4]);
-                        double waVolume = double.Parse(txtWaterVolume.Text);
-                        double AAE5 = double.Parse(lblAAE5.Text);
-                        double HopAmount5 = double.Parse(txtHopAmt5.Text);
-                        double AAA5 = double.Parse(txtAAA5.Text);
-                        IBU[4] = (hopUtil * (AAA5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
-                        lblIBU5.Text = IBU[4].ToString("N2");
-                    }
-                }
-                else
-                {
-                    //lblIBU5.Text = "0";
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("IBU5 Calculator");
-            }
-        }
 
         private void cboHopMin1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            try
-            {
-                dataChange(cboHopMin1);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Hop1 minutes Change Catch");
-                conn.Close();
-            }
-
+            hopDataChange(cboHopMin1);
         }
         private void cboHopMin2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dataChange(cboHopMin2);
+            hopDataChange(cboHopMin2);
         }
 
         private void cboHopMin3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dataChange(cboHopMin3);
+            hopDataChange(cboHopMin3);
         }
 
         private void cboHopMin4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dataChange(cboHopMin4);
+            hopDataChange(cboHopMin4);
         }
 
         private void cboHopMin5_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                dataChange(cboHopMin5);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Hop5 minutes Change Catch");
-                conn.Close();
-            }
-            //MessageBox.Show("Hoputilizaton= " + hoputilization[0]);
-
+            hopDataChange(cboHopMin5);
         }
-        public void dataChange(object sender)
+        public void hopDataChange(object sender)
         {
+
+            double tHopAB = double.Parse(txtHopAB.Text);
+            double waVolume = double.Parse(txtWaterVolume.Text);
+
             if (cboHopMin1 != null)
             {
                 try
@@ -1737,7 +1655,44 @@ namespace Homebrew_Recipe_Calc
                     conn.Close();
                     if (txtWaterVolume.Text.Length > 0)
                     {
-                        ibuCalculator(IBU[0]);
+                        //ibuCalculator(IBU[0]);
+                        try
+                        {
+                            if (txtHopAmt1.Text.Length > 0)
+                            {
+                                double HopAmount1 = double.Parse(txtHopAmt1.Text);
+
+                                if (string.IsNullOrEmpty(txtAAA1.Text))
+                                {
+                                    hopUtil[0] = double.Parse(hoputilization[0]);
+                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double AAE1 = double.Parse(lblAAE1.Text);
+                                    IBU[0] = (hopUtil[0] * (AAE1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
+                                    lblIBU1.Text = IBU[0].ToString("N2");
+                                }
+                                else
+                                {
+                                    hopUtil[0] = double.Parse(hoputilization[0]);
+                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double AAE1 = double.Parse(lblAAE1.Text);
+                                    //double HopAmount1 = double.Parse(txtHopAmt1.Text);
+                                    double AAA1 = double.Parse(txtAAA1.Text);
+                                    IBU[0] = (hopUtil[0] * (AAA1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
+                                    lblIBU1.Text = IBU[0].ToString("N2");
+                                }
+                                hopAB[0] = HopAmount1 * tHopAB;
+                                lblHopWA1.Text = hopAB[0].ToString("");
+
+                            }
+                            else
+                            {
+                                //lblIBU1.Text = "0";
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("IBU1 Calculator");
+                        }
                     }
                     else
                     {
@@ -1779,7 +1734,44 @@ namespace Homebrew_Recipe_Calc
                     conn.Close();
                     if (txtWaterVolume.Text.Length > 0)
                     {
-                        ibuCalculator(IBU[1]);
+                        //ibuCalculator(IBU[1]);
+                        try
+                        {
+                            if (txtHopAmt2.Text.Length > 0)
+                            {
+                                double HopAmount2 = double.Parse(txtHopAmt2.Text);
+
+                                if (string.IsNullOrEmpty(txtAAA2.Text))
+                                {
+                                    hopUtil[1] = double.Parse(hoputilization[1]);
+                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double AAE2 = double.Parse(lblAAE2.Text);
+                                    IBU[1] = (hopUtil[1] * (AAE2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
+                                    lblIBU2.Text = IBU[1].ToString("N2");
+                                }
+                                else
+                                {
+                                    hopUtil[1] = double.Parse(hoputilization[1]);
+                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double AAE2 = double.Parse(lblAAE2.Text);
+                                    //double HopAmount2 = double.Parse(txtHopAmt2.Text);
+                                    double AAA2 = double.Parse(txtAAA1.Text);
+                                    IBU[1] = (hopUtil[1] * (AAA2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
+                                    lblIBU2.Text = IBU[1].ToString("N2");
+                                }
+                                hopAB[1] = HopAmount2 * tHopAB;
+                                lblHopWA2.Text = hopAB[1].ToString("");
+
+                            }
+                            else
+                            {
+                                //lblIBU2.Text = "0";
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("IBU2 Calculator");
+                        }
                     }
                     else
                     {
@@ -1819,7 +1811,44 @@ namespace Homebrew_Recipe_Calc
                     conn.Close();
                     if (txtWaterVolume.Text.Length > 0)
                     {
-                        ibuCalculator(IBU[2]);
+                        //ibuCalculator(IBU[2]);
+                        try
+                        {
+                            if (txtHopAmt3.Text.Length > 0)
+                            {
+                                double HopAmount3 = double.Parse(txtHopAmt3.Text);
+
+                                if (string.IsNullOrEmpty(txtAAA3.Text))
+                                {
+                                    double hopUtil = double.Parse(hoputilization[2]);
+                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double AAE3 = double.Parse(lblAAE3.Text);
+                                    IBU[2] = (hopUtil * (AAE3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
+                                    lblIBU3.Text = IBU[2].ToString("N2");
+                                }
+                                else
+                                {
+                                    double hopUtil = double.Parse(hoputilization[2]);
+                                    //double waVolume = double.Parse(txtWaterVolume.Text);
+                                    double AAE3 = double.Parse(lblAAE3.Text);
+                                    //double HopAmount3 = double.Parse(txtHopAmt3.Text);
+                                    double AAA3 = double.Parse(txtAAA3.Text);
+                                    IBU[2] = (hopUtil * (AAA3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
+                                    lblIBU3.Text = IBU[2].ToString("N2");
+                                }
+                                hopAB[2] = HopAmount3 * tHopAB;
+                                lblHopWA3.Text = hopAB[2].ToString("");
+
+                            }
+                            else
+                            {
+                                //lblIBU3.Text = "0";
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("IBU3 Calculator");
+                        }
                     }
                     else
                     {
@@ -1857,7 +1886,44 @@ namespace Homebrew_Recipe_Calc
                         conn.Close();
                         if (txtWaterVolume.Text.Length > 0)
                         {
-                            ibuCalculator(IBU[3]);
+                            //ibuCalculator(IBU[3]);
+                            try
+                            {
+                                if (txtHopAmt4.Text.Length > 0)
+                                {
+                                    double HopAmount4 = double.Parse(txtHopAmt4.Text);
+
+                                    if (string.IsNullOrEmpty(txtAAA4.Text))
+                                    {
+                                        double hopUtil = double.Parse(hoputilization[3]);
+                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double AAE4 = double.Parse(lblAAE4.Text);
+                                        IBU[3] = (hopUtil * (AAE4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
+                                        lblIBU4.Text = IBU[3].ToString("N2");
+                                    }
+                                    else
+                                    {
+                                        double hopUtil = double.Parse(hoputilization[3]);
+                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double AAE4 = double.Parse(lblAAE4.Text);
+                                        //double HopAmount4 = double.Parse(txtHopAmt4.Text);
+                                        double AAA4 = double.Parse(txtAAA4.Text);
+                                        IBU[3] = (hopUtil * (AAA4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
+                                        lblIBU4.Text = IBU[3].ToString("N2");
+                                    }
+                                    hopAB[3] = HopAmount4 * tHopAB;
+                                    lblHopWA4.Text = hopAB[3].ToString("");
+
+                                }
+                                else
+                                {
+                                    //lblIBU4.Text = "0";
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("IBU4 Calculator");
+                            }
                         }
                         else
                         {
@@ -1895,7 +1961,45 @@ namespace Homebrew_Recipe_Calc
                         conn.Close();
                         if (txtWaterVolume.Text.Length > 0)
                         {
-                            ibuCalculator(IBU[4]);
+                            //ibuCalculator(IBU[4]);
+                            try
+                            {
+                                if (txtHopAmt5.Text.Length > 0)
+                                {
+                                    double HopAmount5 = double.Parse(txtHopAmt5.Text);
+
+                                    if (string.IsNullOrEmpty(txtAAA5.Text))
+                                    {
+                                        double hopUtil = double.Parse(hoputilization[4]);
+                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double AAE5 = double.Parse(lblAAE5.Text);
+                                        IBU[4] = (hopUtil * (AAE5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
+                                        lblIBU5.Text = IBU[4].ToString("N2");
+                                    }
+                                    else
+                                    {
+                                        double hopUtil = double.Parse(hoputilization[4]);
+                                        //double waVolume = double.Parse(txtWaterVolume.Text);
+                                        double AAE5 = double.Parse(lblAAE5.Text);
+                                        //double HopAmount5 = double.Parse(txtHopAmt5.Text);
+                                        double AAA5 = double.Parse(txtAAA5.Text);
+                                        IBU[4] = (hopUtil * (AAA5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
+                                        lblIBU5.Text = IBU[4].ToString("N2");
+                                    }
+                                    hopAB[4] = HopAmount5 * tHopAB;
+                                    lblHopWA5.Text = hopAB[4].ToString("");
+
+                                }
+                                else
+                                {
+                                    //lblIBU5.Text = "0";
+                                }
+                            }
+
+                            catch (Exception)
+                            {
+                                MessageBox.Show("IBU5 Calculator");
+                            }
                         }
                         else
                         {
@@ -1924,6 +2028,236 @@ namespace Homebrew_Recipe_Calc
                 }
 
             }
+        }
+        private void ibuCalculator(object sender)
+        {
+            //if (txtHopAB.Text == "") //string.IsNullOrEmpty(txtHopAB.Text))
+            {
+                //txtHopAB.Text = "5";
+
+                double tHopAB = double.Parse(txtHopAB.Text);
+                double waVolume = double.Parse(txtWaterVolume.Text);
+
+                /*try
+                {
+                    if (txtHopAmt1.Text.Length > 0)
+                    {
+                        double HopAmount1 = double.Parse(txtHopAmt1.Text);
+
+                        if (string.IsNullOrEmpty(txtAAA1.Text))
+                        {
+                            hopUtil[0] = double.Parse(hoputilization[0]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE1 = double.Parse(lblAAE1.Text);
+                            IBU[0] = (hopUtil[0] * (AAE1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
+                            lblIBU1.Text = IBU[0].ToString("N2");
+                        }
+                        else
+                        {
+                            hopUtil[0] = double.Parse(hoputilization[0]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE1 = double.Parse(lblAAE1.Text);
+                            //double HopAmount1 = double.Parse(txtHopAmt1.Text);
+                            double AAA1 = double.Parse(txtAAA1.Text);
+                            IBU[0] = (hopUtil[0] * (AAA1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
+                            lblIBU1.Text = IBU[0].ToString("N2");
+                        }
+                        hopAB[0] = HopAmount1 * tHopAB;
+                        lblHopWA1.Text = hopAB[0].ToString("");
+
+                    }
+                    else
+                    {
+                        //lblIBU1.Text = "0";
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("IBU1 Calculator");
+                }
+                try
+                {
+                    if (txtHopAmt2.Text.Length > 0)
+                    {
+                        double HopAmount2 = double.Parse(txtHopAmt2.Text);
+
+                        if (string.IsNullOrEmpty(txtAAA2.Text))
+                        {
+                            hopUtil[1] = double.Parse(hoputilization[1]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE2 = double.Parse(lblAAE2.Text);
+                            IBU[1] = (hopUtil[1] * (AAE2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
+                            lblIBU2.Text = IBU[1].ToString("N2");
+                        }
+                        else
+                        {
+                            hopUtil[1] = double.Parse(hoputilization[1]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE2 = double.Parse(lblAAE2.Text);
+                            //double HopAmount2 = double.Parse(txtHopAmt2.Text);
+                            double AAA2 = double.Parse(txtAAA1.Text);
+                            IBU[1] = (hopUtil[1] * (AAA2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
+                            lblIBU2.Text = IBU[1].ToString("N2");
+                        }
+                        hopAB[1] = HopAmount2 * tHopAB;
+                        lblHopWA2.Text = hopAB[1].ToString("");
+
+                    }
+                    else
+                    {
+                        //lblIBU2.Text = "0";
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("IBU2 Calculator");
+                }
+                try
+                {
+                    if (txtHopAmt3.Text.Length > 0)
+                    {
+                        double HopAmount3 = double.Parse(txtHopAmt3.Text);
+
+                        if (string.IsNullOrEmpty(txtAAA3.Text))
+                        {
+                            double hopUtil = double.Parse(hoputilization[2]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE3 = double.Parse(lblAAE3.Text);
+                            IBU[2] = (hopUtil * (AAE3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
+                            lblIBU3.Text = IBU[2].ToString("N2");
+                        }
+                        else
+                        {
+                            double hopUtil = double.Parse(hoputilization[2]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE3 = double.Parse(lblAAE3.Text);
+                            //double HopAmount3 = double.Parse(txtHopAmt3.Text);
+                            double AAA3 = double.Parse(txtAAA3.Text);
+                            IBU[2] = (hopUtil * (AAA3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
+                            lblIBU3.Text = IBU[2].ToString("N2");
+                        }
+                        hopAB[2] = HopAmount3 * tHopAB;
+                        lblHopWA3.Text = hopAB[2].ToString("");
+
+                    }
+                    else
+                    {
+                        //lblIBU3.Text = "0";
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("IBU3 Calculator");
+                }
+                try
+                {
+                    if (txtHopAmt4.Text.Length > 0)
+                    {
+                        double HopAmount4 = double.Parse(txtHopAmt4.Text);
+
+                        if (string.IsNullOrEmpty(txtAAA4.Text))
+                        {
+                            double hopUtil = double.Parse(hoputilization[3]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE4 = double.Parse(lblAAE4.Text);
+                            IBU[3] = (hopUtil * (AAE4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
+                            lblIBU4.Text = IBU[3].ToString("N2");
+                        }
+                        else
+                        {
+                            double hopUtil = double.Parse(hoputilization[3]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE4 = double.Parse(lblAAE4.Text);
+                            //double HopAmount4 = double.Parse(txtHopAmt4.Text);
+                            double AAA4 = double.Parse(txtAAA4.Text);
+                            IBU[3] = (hopUtil * (AAA4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
+                            lblIBU4.Text = IBU[3].ToString("N2");
+                        }
+                        hopAB[3] = HopAmount4 * tHopAB;
+                        lblHopWA4.Text = hopAB[3].ToString("");
+
+                    }
+                    else
+                    {
+                        //lblIBU4.Text = "0";
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("IBU4 Calculator");
+                }
+                try
+                {
+                    if (txtHopAmt5.Text.Length > 0)
+                    {
+                        double HopAmount5 = double.Parse(txtHopAmt5.Text);
+
+                        if (string.IsNullOrEmpty(txtAAA5.Text))
+                        {
+                            double hopUtil = double.Parse(hoputilization[4]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE5 = double.Parse(lblAAE5.Text);
+                            IBU[4] = (hopUtil * (AAE5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
+                            lblIBU5.Text = IBU[4].ToString("N2");
+                        }
+                        else
+                        {
+                            double hopUtil = double.Parse(hoputilization[4]);
+                            //double waVolume = double.Parse(txtWaterVolume.Text);
+                            double AAE5 = double.Parse(lblAAE5.Text);
+                            //double HopAmount5 = double.Parse(txtHopAmt5.Text);
+                            double AAA5 = double.Parse(txtAAA5.Text);
+                            IBU[4] = (hopUtil * (AAA5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
+                            lblIBU5.Text = IBU[4].ToString("N2");
+                        }
+                        hopAB[4] = HopAmount5 * tHopAB;
+                        lblHopWA5.Text = hopAB[4].ToString("");
+
+                    }
+                    else
+                    {
+                        //lblIBU5.Text = "0";
+                    }
+                }
+
+                catch (Exception)
+                {
+                    MessageBox.Show("IBU5 Calculator");
+                }*/
+            }
+            //else
+            {
+                //txtHopAB.Text = "5";
+            }
+        }
+
+        private void txtHopAmt1_TextChanged(object sender, EventArgs e)
+        {
+            hopDataChange(txtHopAmt1);
+        }
+
+        private void txtHopAmt2_TextChanged(object sender, EventArgs e)
+        {
+            hopDataChange(txtHopAmt2);
+
+        }
+
+        private void txtHopAmt3_TextChanged(object sender, EventArgs e)
+        {
+            hopDataChange(txtHopAmt3);
+
+        }
+
+        private void txtHopAmt4_TextChanged(object sender, EventArgs e)
+        {
+            hopDataChange(txtHopAmt4);
+
+        }
+
+        private void txtHopAmt5_TextChanged(object sender, EventArgs e)
+        {
+            hopDataChange(txtHopAmt5);
+
         }
     }
 }

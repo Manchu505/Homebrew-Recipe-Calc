@@ -222,11 +222,11 @@
             this.lblIBU3 = new System.Windows.Forms.Label();
             this.lblIBU4 = new System.Windows.Forms.Label();
             this.lblIBU5 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
+            this.lblHopWA1 = new System.Windows.Forms.Label();
+            this.lblHopWA2 = new System.Windows.Forms.Label();
+            this.lblHopWA3 = new System.Windows.Forms.Label();
+            this.lblHopWA4 = new System.Windows.Forms.Label();
+            this.lblHopWA5 = new System.Windows.Forms.Label();
             this.txtAAA1 = new System.Windows.Forms.TextBox();
             this.txtAAA2 = new System.Windows.Forms.TextBox();
             this.txtAAA3 = new System.Windows.Forms.TextBox();
@@ -295,7 +295,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblLbGrain2, 2, 1);
@@ -715,7 +715,7 @@
             this.cboGrain1.Name = "cboGrain1";
             this.cboGrain1.Size = new System.Drawing.Size(194, 21);
             this.cboGrain1.TabIndex = 1;
-            this.cboGrain1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cboGrain1.SelectedIndexChanged += new System.EventHandler(this.cboGrain1_SelectedIndexChanged);
             // 
             // cboGrain2
             // 
@@ -724,7 +724,7 @@
             this.cboGrain2.Name = "cboGrain2";
             this.cboGrain2.Size = new System.Drawing.Size(194, 21);
             this.cboGrain2.TabIndex = 3;
-            this.cboGrain2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.cboGrain2.SelectedIndexChanged += new System.EventHandler(this.cboGrain2_SelectedIndexChanged);
             // 
             // cboGrain3
             // 
@@ -2005,6 +2005,7 @@
             this.txtWaterToAdd.ReadOnly = true;
             this.txtWaterToAdd.Size = new System.Drawing.Size(124, 20);
             this.txtWaterToAdd.TabIndex = 10;
+            this.txtWaterToAdd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblWaterVolume
             // 
@@ -2057,8 +2058,9 @@
             this.txtWaterToAddGal.Location = new System.Drawing.Point(842, 61);
             this.txtWaterToAddGal.Name = "txtWaterToAddGal";
             this.txtWaterToAddGal.ReadOnly = true;
-            this.txtWaterToAddGal.Size = new System.Drawing.Size(124, 20);
+            this.txtWaterToAddGal.Size = new System.Drawing.Size(86, 20);
             this.txtWaterToAddGal.TabIndex = 10;
+            this.txtWaterToAddGal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -2074,8 +2076,9 @@
             this.txtWaterFinishGal.Location = new System.Drawing.Point(842, 87);
             this.txtWaterFinishGal.Name = "txtWaterFinishGal";
             this.txtWaterFinishGal.ReadOnly = true;
-            this.txtWaterFinishGal.Size = new System.Drawing.Size(124, 20);
+            this.txtWaterFinishGal.Size = new System.Drawing.Size(86, 20);
             this.txtWaterFinishGal.TabIndex = 10;
+            this.txtWaterFinishGal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtWaterVolume
             // 
@@ -2171,6 +2174,8 @@
             this.txtHopAB.Name = "txtHopAB";
             this.txtHopAB.Size = new System.Drawing.Size(124, 20);
             this.txtHopAB.TabIndex = 10;
+            this.txtHopAB.Text = "5";
+            this.txtHopAB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
             // 
@@ -2192,8 +2197,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.tableLayoutPanel2.Controls.Add(this.lblIBU1, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.cboHops1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.cboHops2, 0, 1);
@@ -2209,11 +2214,11 @@
             this.tableLayoutPanel2.Controls.Add(this.lblIBU3, 5, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblIBU4, 5, 3);
             this.tableLayoutPanel2.Controls.Add(this.lblIBU5, 5, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label37, 6, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label38, 6, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label39, 6, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label40, 6, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label41, 6, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblHopWA1, 6, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblHopWA2, 6, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblHopWA3, 6, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblHopWA4, 6, 3);
+            this.tableLayoutPanel2.Controls.Add(this.lblHopWA5, 6, 4);
             this.tableLayoutPanel2.Controls.Add(this.txtAAA1, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtAAA2, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtAAA3, 4, 2);
@@ -2247,7 +2252,7 @@
             this.lblIBU1.AutoSize = true;
             this.lblIBU1.Location = new System.Drawing.Point(469, 9);
             this.lblIBU1.Name = "lblIBU1";
-            this.lblIBU1.Size = new System.Drawing.Size(62, 13);
+            this.lblIBU1.Size = new System.Drawing.Size(59, 13);
             this.lblIBU1.TabIndex = 17;
             this.lblIBU1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -2352,7 +2357,7 @@
             this.lblIBU2.AutoSize = true;
             this.lblIBU2.Location = new System.Drawing.Point(469, 40);
             this.lblIBU2.Name = "lblIBU2";
-            this.lblIBU2.Size = new System.Drawing.Size(62, 13);
+            this.lblIBU2.Size = new System.Drawing.Size(59, 13);
             this.lblIBU2.TabIndex = 17;
             this.lblIBU2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -2362,7 +2367,7 @@
             this.lblIBU3.AutoSize = true;
             this.lblIBU3.Location = new System.Drawing.Point(469, 71);
             this.lblIBU3.Name = "lblIBU3";
-            this.lblIBU3.Size = new System.Drawing.Size(62, 13);
+            this.lblIBU3.Size = new System.Drawing.Size(59, 13);
             this.lblIBU3.TabIndex = 17;
             this.lblIBU3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -2372,7 +2377,7 @@
             this.lblIBU4.AutoSize = true;
             this.lblIBU4.Location = new System.Drawing.Point(469, 102);
             this.lblIBU4.Name = "lblIBU4";
-            this.lblIBU4.Size = new System.Drawing.Size(62, 13);
+            this.lblIBU4.Size = new System.Drawing.Size(59, 13);
             this.lblIBU4.TabIndex = 17;
             this.lblIBU4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -2382,60 +2387,60 @@
             this.lblIBU5.AutoSize = true;
             this.lblIBU5.Location = new System.Drawing.Point(469, 133);
             this.lblIBU5.Name = "lblIBU5";
-            this.lblIBU5.Size = new System.Drawing.Size(62, 13);
+            this.lblIBU5.Size = new System.Drawing.Size(59, 13);
             this.lblIBU5.TabIndex = 17;
             this.lblIBU5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label37
+            // lblHopWA1
             // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label37.AutoSize = true;
-            this.label37.BackColor = System.Drawing.Color.DarkGray;
-            this.label37.Location = new System.Drawing.Point(538, 9);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(74, 13);
-            this.label37.TabIndex = 17;
-            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHopWA1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHopWA1.AutoSize = true;
+            this.lblHopWA1.BackColor = System.Drawing.Color.DarkGray;
+            this.lblHopWA1.Location = new System.Drawing.Point(535, 9);
+            this.lblHopWA1.Name = "lblHopWA1";
+            this.lblHopWA1.Size = new System.Drawing.Size(60, 13);
+            this.lblHopWA1.TabIndex = 17;
+            this.lblHopWA1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label38
+            // lblHopWA2
             // 
-            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(538, 40);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(74, 13);
-            this.label38.TabIndex = 17;
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHopWA2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHopWA2.AutoSize = true;
+            this.lblHopWA2.Location = new System.Drawing.Point(535, 40);
+            this.lblHopWA2.Name = "lblHopWA2";
+            this.lblHopWA2.Size = new System.Drawing.Size(60, 13);
+            this.lblHopWA2.TabIndex = 17;
+            this.lblHopWA2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label39
+            // lblHopWA3
             // 
-            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(538, 71);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(74, 13);
-            this.label39.TabIndex = 17;
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHopWA3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHopWA3.AutoSize = true;
+            this.lblHopWA3.Location = new System.Drawing.Point(535, 71);
+            this.lblHopWA3.Name = "lblHopWA3";
+            this.lblHopWA3.Size = new System.Drawing.Size(60, 13);
+            this.lblHopWA3.TabIndex = 17;
+            this.lblHopWA3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label40
+            // lblHopWA4
             // 
-            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(538, 102);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(74, 13);
-            this.label40.TabIndex = 17;
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHopWA4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHopWA4.AutoSize = true;
+            this.lblHopWA4.Location = new System.Drawing.Point(535, 102);
+            this.lblHopWA4.Name = "lblHopWA4";
+            this.lblHopWA4.Size = new System.Drawing.Size(60, 13);
+            this.lblHopWA4.TabIndex = 17;
+            this.lblHopWA4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label41
+            // lblHopWA5
             // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(538, 133);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(74, 13);
-            this.label41.TabIndex = 17;
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHopWA5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHopWA5.AutoSize = true;
+            this.lblHopWA5.Location = new System.Drawing.Point(535, 133);
+            this.lblHopWA5.Name = "lblHopWA5";
+            this.lblHopWA5.Size = new System.Drawing.Size(60, 13);
+            this.lblHopWA5.TabIndex = 17;
+            this.lblHopWA5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtAAA1
             // 
@@ -2484,6 +2489,7 @@
             this.txtHopAmt1.Name = "txtHopAmt1";
             this.txtHopAmt1.Size = new System.Drawing.Size(59, 20);
             this.txtHopAmt1.TabIndex = 18;
+            this.txtHopAmt1.TextChanged += new System.EventHandler(this.txtHopAmt1_TextChanged);
             // 
             // txtHopAmt2
             // 
@@ -2492,6 +2498,7 @@
             this.txtHopAmt2.Name = "txtHopAmt2";
             this.txtHopAmt2.Size = new System.Drawing.Size(59, 20);
             this.txtHopAmt2.TabIndex = 18;
+            this.txtHopAmt2.TextChanged += new System.EventHandler(this.txtHopAmt2_TextChanged);
             // 
             // txtHopAmt3
             // 
@@ -2500,6 +2507,7 @@
             this.txtHopAmt3.Name = "txtHopAmt3";
             this.txtHopAmt3.Size = new System.Drawing.Size(59, 20);
             this.txtHopAmt3.TabIndex = 18;
+            this.txtHopAmt3.TextChanged += new System.EventHandler(this.txtHopAmt3_TextChanged);
             // 
             // txtHopAmt4
             // 
@@ -2508,6 +2516,7 @@
             this.txtHopAmt4.Name = "txtHopAmt4";
             this.txtHopAmt4.Size = new System.Drawing.Size(59, 20);
             this.txtHopAmt4.TabIndex = 18;
+            this.txtHopAmt4.TextChanged += new System.EventHandler(this.txtHopAmt4_TextChanged);
             // 
             // txtHopAmt5
             // 
@@ -2516,6 +2525,7 @@
             this.txtHopAmt5.Name = "txtHopAmt5";
             this.txtHopAmt5.Size = new System.Drawing.Size(59, 20);
             this.txtHopAmt5.TabIndex = 18;
+            this.txtHopAmt5.TextChanged += new System.EventHandler(this.txtHopAmt5_TextChanged);
             // 
             // cboHopMin1
             // 
@@ -2625,7 +2635,7 @@
             this.panel3.Controls.Add(this.tableLayoutPanel2);
             this.panel3.Location = new System.Drawing.Point(28, 484);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(661, 205);
+            this.panel3.Size = new System.Drawing.Size(694, 205);
             this.panel3.TabIndex = 18;
             // 
             // textBox18
@@ -2696,7 +2706,7 @@
             this.panel6.Controls.Add(this.label11);
             this.panel6.Controls.Add(this.txtYeastFactor);
             this.panel6.Controls.Add(this.lstYeast);
-            this.panel6.Location = new System.Drawing.Point(700, 484);
+            this.panel6.Location = new System.Drawing.Point(733, 484);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(492, 116);
             this.panel6.TabIndex = 21;
@@ -2970,11 +2980,11 @@
         private System.Windows.Forms.Label lblIBU3;
         private System.Windows.Forms.Label lblIBU4;
         private System.Windows.Forms.Label lblIBU5;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label lblHopWA1;
+        private System.Windows.Forms.Label lblHopWA2;
+        private System.Windows.Forms.Label lblHopWA3;
+        private System.Windows.Forms.Label lblHopWA4;
+        private System.Windows.Forms.Label lblHopWA5;
         private System.Windows.Forms.TextBox txtAAA1;
         private System.Windows.Forms.TextBox txtAAA2;
         private System.Windows.Forms.TextBox txtAAA3;
