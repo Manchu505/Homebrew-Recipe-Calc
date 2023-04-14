@@ -28,23 +28,25 @@ namespace Homebrew_Recipe_Calc
         double[] FGCon = new double[9];
         double[] hopAB = new double[9];
         double[] lblwaterAB = new double[9];
-
+        double[] IBU = new double[9];
+        string[] hoputilization = new string[9];
+        //double[] hopUtil = new double[9];
+        OleDbConnection conn;
+        OleDbCommand command;
 
         public frmRecipe()
         {
             InitializeComponent();
+            String DBPath = Application.StartupPath + "\\Access_ingredients.accdb";
+            conn = new OleDbConnection("provider = Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + DBPath);
         }
-        OleDbConnection conn;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
-                var DBPath = Application.StartupPath + "\\Access_ingredients.accdb";
-                conn = new OleDbConnection("provider = Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + DBPath);
-
                 conn.Open();
-                OleDbCommand command = new OleDbCommand();
+                command = new OleDbCommand();
                 command.Connection = conn;
                 string query = "select * from GRAINLOOKUP";
                 command.CommandText = query;
@@ -62,49 +64,70 @@ namespace Homebrew_Recipe_Calc
                     cboGrain8.Items.Add(reader["Grain"].ToString());
                     cboGrain9.Items.Add(reader["Grain"].ToString());
                 }
-                label34.Text = "Connection Successful";
-                //conn.Close();
+                label34.Text = "Grain Connection Successful";
+                conn.Close();
 
-                var DBPath1 = Application.StartupPath + "\\Access_ingredients.accdb";
-                conn = new OleDbConnection("provider = Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + DBPath1);
-                conn.Open();
-                OleDbCommand command1 = new OleDbCommand();
-                command1.Connection = conn;
-                string query1 = "select * from HOPLOOKUP";
-                command1.CommandText = query1;
-
-                OleDbDataReader reader1 = command1.ExecuteReader();
-                while (reader1.Read())
-                {
-                    cboHops1.Items.Add(reader1["Hop"].ToString());
-                    cboHops2.Items.Add(reader1["Hop"].ToString());
-                    cboHops3.Items.Add(reader1["Hop"].ToString());
-                    cboHops4.Items.Add(reader1["Hop"].ToString());
-                    cboHops5.Items.Add(reader1["Hop"].ToString());
-
-                }
-                label12.Text = "Connection Successful";
-
-                var DBPath2 = Application.StartupPath + "\\Access_ingredients.accdb";
-                conn = new OleDbConnection("provider = Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + DBPath2);
-                conn.Open();
-                OleDbCommand command2 = new OleDbCommand();
-                command2.Connection = conn;
-                string query2 = "select * from YEASTLOOKUP";
-                command2.CommandText = query2;
-
-                OleDbDataReader reader2 = command2.ExecuteReader();
-                while (reader2.Read())
-                {
-                    lstYeast.Items.Add(reader2["Yeast Strain"].ToString());
-                    cboYeast.Items.Add(reader2["Yeast Strain"].ToString());
-                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Grain Combo Box Catch");
                 conn.Close();
             }
-            catch (Exception ex)
+            try
             {
-                MessageBox.Show(ex.Message);
+                conn.Open();
+                command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from HOPLOOKUP";
+                command.CommandText = query;
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    cboHops1.Items.Add(reader["Hop"].ToString());
+                    cboHops2.Items.Add(reader["Hop"].ToString());
+                    cboHops3.Items.Add(reader["Hop"].ToString());
+                    cboHops4.Items.Add(reader["Hop"].ToString());
+                    cboHops5.Items.Add(reader["Hop"].ToString());
+                    cboHopMin1.Items.Add(reader["Minutes"].ToString());
+                    cboHopMin2.Items.Add(reader["Minutes"].ToString());
+                    cboHopMin3.Items.Add(reader["Minutes"].ToString());
+                    cboHopMin4.Items.Add(reader["Minutes"].ToString());
+                    cboHopMin5.Items.Add(reader["Minutes"].ToString());
+
+                }
+                label12.Text = "Hop Connection Successful";
+                conn.Close();
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop Combo Box Catch");
+                conn.Close();
+            }
+            try
+            {
+                conn.Open();
+                command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from YEASTLOOKUP";
+                command.CommandText = query;
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    lstYeast.Items.Add(reader["YeastStrain"].ToString());
+                }
+                label13.Text = "Yeast Connection Successful";
+                conn.Close();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Yeast Combo Box Catch");
+                conn.Close();
+            }
+
+
         }
         private void percentChange(object sender)
         {
@@ -169,51 +192,25 @@ namespace Homebrew_Recipe_Calc
             try
             {
                 conn.Open();
-                OleDbCommand command = new OleDbCommand();
+                command = new OleDbCommand();
                 command.Connection = conn;
-                string query = "select * from YEASTLOOKUP where Yeast Strain='" + cboYeast.Text + "'";
+                string query = "select * from YEASTLOOKUP where YeastStrain='" + lstYeast.Text + "'";
                 command.CommandText = query;
 
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    lblYeastFactor.Text = reader["Attenuation"].ToString();
+                    txtYeastFactor.Text = reader["Attenuation"].ToString();
                 }
                 conn.Close();
+                yeastFact = double.Parse(txtYeastFactor.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Yeast ComboBox Change Catch");
                 conn.Close();
-
             }
         }
-        private void cboYeast_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                conn.Open();
-                OleDbCommand command = new OleDbCommand();
-                command.Connection = conn;
-                string query = "select * from YEASTLOOKUP where Yeast Strain='" + cboYeast.Text + "'";
-                command.CommandText = query;
-
-                OleDbDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    lblYeastFactor.Text = reader["Attenuation"].ToString();
-                }
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                conn.Close();
-
-            }
-        }
-
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -242,13 +239,11 @@ namespace Homebrew_Recipe_Calc
             {
                 MessageBox.Show(ex.Message);
                 conn.Close();
-
             }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             try
             {
                 conn.Open();
@@ -372,7 +367,6 @@ namespace Homebrew_Recipe_Calc
             }
 
         }
-
         private void cboGrain6_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -502,9 +496,7 @@ namespace Homebrew_Recipe_Calc
                 conn.Close();
 
             }
-
         }
-
         private void grainWt0(object sender)
         {
             try
@@ -1281,18 +1273,19 @@ namespace Homebrew_Recipe_Calc
                 MessageBox.Show("First Change Box Catch");
             }
         }
-
-
         private void button1_Click_1(object sender, EventArgs e)
         {
-
-            // for (p = 0; p <= 0; p++)
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to start a new recipe?", "Reset Form", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                // MessageBox.Show("Loop");
+                //Clear the current form and start over
+                frmRecipe NewForm = new frmRecipe();
+                NewForm.Show();
+                this.Dispose(false);
             }
-            // catch (Exception ex)
+            else if (dialogResult == DialogResult.No)
             {
-                // MessageBox.Show(ex.Message);
+                //Return to current form
             }
         }
 
@@ -1306,7 +1299,8 @@ namespace Homebrew_Recipe_Calc
         {
             try
             {
-                yeastFact = double.Parse(txtYeastFactor.Text);
+                //yeastFact = double.Parse(txtYeastFactor.Text);
+                //need to update calls to other functions!!
             }
             catch (Exception) { }
 
@@ -1322,11 +1316,7 @@ namespace Homebrew_Recipe_Calc
         {
             calcABV ABVC = new calcABV();
             ABVC.Show();
-
         }
-
-
-
         private void txtWaterVolume_TextChanged_1(object sender, EventArgs e)
         {
             try
@@ -1334,6 +1324,7 @@ namespace Homebrew_Recipe_Calc
                 if (txtWaterVolume.Text.Length > 0)
                 {
                     watervolume(txtWaterVolume);
+                    dataChange(txtWaterVolume);
                 }
                 if (txtGrainWT1.Text.Length > 0)
                 {
@@ -1390,7 +1381,551 @@ namespace Homebrew_Recipe_Calc
             }
             catch (Exception) { }
         }
+        private void cboHops1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from HOPLOOKUP where Hop='" + cboHops1.Text + "'";
+                command.CommandText = query;
 
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    lblAAE1.Text = reader["Default Alpha Acid %"].ToString();
+                }
+                conn.Close();
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Hop1 ComboBox Change Catch");
+                conn.Close();
+            }
+        }
+
+        private void cboHops2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from HOPLOOKUP where Hop='" + cboHops2.Text + "'";
+                command.CommandText = query;
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    lblAAE2.Text = reader["Default Alpha Acid %"].ToString();
+                }
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop2 ComboBox Change Catch");
+                conn.Close();
+            }
+        }
+
+        private void cboHops3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from HOPLOOKUP where Hop='" + cboHops3.Text + "'";
+                command.CommandText = query;
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    lblAAE3.Text = reader["Default Alpha Acid %"].ToString();
+                }
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop3 ComboBox Change Catch");
+                conn.Close();
+            }
+        }
+
+        private void cboHops4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from HOPLOOKUP where Hop='" + cboHops4.Text + "'";
+                command.CommandText = query;
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    lblAAE4.Text = reader["Default Alpha Acid %"].ToString();
+                }
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop4 ComboBox Change Catch");
+                conn.Close();
+            }
+        }
+
+        private void cboHops5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = conn;
+                string query = "select * from HOPLOOKUP where Hop='" + cboHops5.Text + "'";
+                command.CommandText = query;
+
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    lblAAE5.Text = reader["Default Alpha Acid %"].ToString();
+                }
+                conn.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop5 ComboBox Change Catch");
+                conn.Close();
+            }
+        }
+        private void ibuCalculator(object sender)
+        {
+            try
+            {
+                if (txtHopAmt1.Text.Length > 0)
+                {
+
+                    if (string.IsNullOrEmpty(txtAAA1.Text))
+                    {
+                        double hopUtil = double.Parse(hoputilization[0]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE1 = double.Parse(lblAAE1.Text);
+                        double HopAmount1 = double.Parse(txtHopAmt1.Text);
+                        IBU[0] = (hopUtil * (AAE1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
+                        lblIBU1.Text = IBU[0].ToString("N2");
+                    }
+                    else
+                    {
+                        double hopUtil = double.Parse(hoputilization[0]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE1 = double.Parse(lblAAE1.Text);
+                        double HopAmount1 = double.Parse(txtHopAmt1.Text);
+                        double AAA1 = double.Parse(txtAAA1.Text);
+                        IBU[0] = (hopUtil * (AAA1 / 100) * HopAmount1 * 1000) / (waVolume / 1000);
+                        lblIBU1.Text = IBU[0].ToString("N2");
+                    }
+                }
+                else
+                {
+                    //lblIBU1.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("IBU1 Calculator");
+            }
+            try
+            {
+                if (txtHopAmt2.Text.Length > 0)
+                {
+
+                    if (string.IsNullOrEmpty(txtAAA2.Text))
+                    {
+                        double hopUtil = double.Parse(hoputilization[1]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE2 = double.Parse(lblAAE2.Text);
+                        double HopAmount2 = double.Parse(txtHopAmt2.Text);
+                        IBU[1] = (hopUtil * (AAE2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
+                        lblIBU2.Text = IBU[1].ToString("N2");
+                    }
+                    else
+                    {
+                        double hopUtil = double.Parse(hoputilization[1]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE2 = double.Parse(lblAAE2.Text);
+                        double HopAmount2 = double.Parse(txtHopAmt2.Text);
+                        double AAA2 = double.Parse(txtAAA1.Text);
+                        IBU[1] = (hopUtil * (AAA2 / 100) * HopAmount2 * 1000) / (waVolume / 1000);
+                        lblIBU2.Text = IBU[1].ToString("N2");
+                    }
+                }
+                else
+                {
+                    //lblIBU2.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("IBU2 Calculator");
+            }
+            try
+            {
+                if (txtHopAmt3.Text.Length > 0)
+                {
+
+                    if (string.IsNullOrEmpty(txtAAA3.Text))
+                    {
+                        double hopUtil = double.Parse(hoputilization[2]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE3 = double.Parse(lblAAE3.Text);
+                        double HopAmount3 = double.Parse(txtHopAmt3.Text);
+                        IBU[2] = (hopUtil * (AAE3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
+                        lblIBU3.Text = IBU[2].ToString("N2");
+                    }
+                    else
+                    {
+                        double hopUtil = double.Parse(hoputilization[2]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE3 = double.Parse(lblAAE3.Text);
+                        double HopAmount3 = double.Parse(txtHopAmt3.Text);
+                        double AAA3 = double.Parse(txtAAA3.Text);
+                        IBU[2] = (hopUtil * (AAA3 / 100) * HopAmount3 * 1000) / (waVolume / 1000);
+                        lblIBU3.Text = IBU[2].ToString("N2");
+                    }
+                }
+                else
+                {
+                    //lblIBU3.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("IBU3 Calculator");
+            }
+            try
+            {
+                if (txtHopAmt4.Text.Length > 0)
+                {
+
+                    if (string.IsNullOrEmpty(txtAAA4.Text))
+                    {
+                        double hopUtil = double.Parse(hoputilization[3]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE4 = double.Parse(lblAAE4.Text);
+                        double HopAmount4 = double.Parse(txtHopAmt4.Text);
+                        IBU[3] = (hopUtil * (AAE4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
+                        lblIBU4.Text = IBU[3].ToString("N2");
+                    }
+                    else
+                    {
+                        double hopUtil = double.Parse(hoputilization[3]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE4 = double.Parse(lblAAE4.Text);
+                        double HopAmount4 = double.Parse(txtHopAmt4.Text);
+                        double AAA4 = double.Parse(txtAAA4.Text);
+                        IBU[3] = (hopUtil * (AAA4 / 100) * HopAmount4 * 1000) / (waVolume / 1000);
+                        lblIBU4.Text = IBU[3].ToString("N2");
+                    }
+                }
+                else
+                {
+                    //lblIBU4.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("IBU4 Calculator");
+            }
+            try
+            {
+                if (txtHopAmt5.Text.Length > 0)
+                {
+
+                    if (string.IsNullOrEmpty(txtAAA5.Text))
+                    {
+                        double hopUtil = double.Parse(hoputilization[4]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE5 = double.Parse(lblAAE5.Text);
+                        double HopAmount5 = double.Parse(txtHopAmt5.Text);
+                        IBU[4] = (hopUtil * (AAE5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
+                        lblIBU5.Text = IBU[4].ToString("N2");
+                    }
+                    else
+                    {
+                        double hopUtil = double.Parse(hoputilization[4]);
+                        double waVolume = double.Parse(txtWaterVolume.Text);
+                        double AAE5 = double.Parse(lblAAE5.Text);
+                        double HopAmount5 = double.Parse(txtHopAmt5.Text);
+                        double AAA5 = double.Parse(txtAAA5.Text);
+                        IBU[4] = (hopUtil * (AAA5 / 100) * HopAmount5 * 1000) / (waVolume / 1000);
+                        lblIBU5.Text = IBU[4].ToString("N2");
+                    }
+                }
+                else
+                {
+                    //lblIBU5.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("IBU5 Calculator");
+            }
+        }
+
+        private void cboHopMin1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                dataChange(cboHopMin1);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop1 minutes Change Catch");
+                conn.Close();
+            }
+
+        }
+        private void cboHopMin2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataChange(cboHopMin2);
+        }
+
+        private void cboHopMin3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataChange(cboHopMin3);
+        }
+
+        private void cboHopMin4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataChange(cboHopMin4);
+        }
+
+        private void cboHopMin5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dataChange(cboHopMin5);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hop5 minutes Change Catch");
+                conn.Close();
+            }
+            //MessageBox.Show("Hoputilizaton= " + hoputilization[0]);
+
+        }
+        public void dataChange(object sender)
+        {
+            if (cboHopMin1 != null)
+            {
+                try
+                {
+                    conn.Open();
+                    command = new OleDbCommand();
+                    command.Connection = conn;
+                    string query = "select * from HOPLOOKUP where Minutes='" + cboHopMin1.Text + "'";
+                    command.CommandText = query;
+
+                    OleDbDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        hoputilization[0] = reader["HOPUTILIZATION"].ToString();
+                    }
+                    conn.Close();
+                    if (txtWaterVolume.Text.Length > 0)
+                    {
+                        ibuCalculator(IBU[0]);
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(txtHopAmt1.Text))
+                        {
+                            lblIBU1.Text = " ";
+                        }
+                        else
+                        {
+                            lblIBU1.Text = "0";
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Hop1 minutes Change Catch");
+                    conn.Close();
+                }
+            }
+            else
+            {
+            }
+            if (cboHopMin2 != null)
+            {
+
+                try
+                {
+                    conn.Open();
+                    command = new OleDbCommand();
+                    command.Connection = conn;
+                    string query = "select * from HOPLOOKUP where Minutes='" + cboHopMin2.Text + "'";
+                    command.CommandText = query;
+
+                    OleDbDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        hoputilization[1] = reader["HOPUTILIZATION"].ToString();
+                    }
+                    conn.Close();
+                    if (txtWaterVolume.Text.Length > 0)
+                    {
+                        ibuCalculator(IBU[1]);
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(txtHopAmt2.Text))
+                        {
+                            lblIBU2.Text = " ";
+                        }
+                        else
+                        {
+                            lblIBU2.Text = "0";
+                        }
+
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Hop1 minutes Change Catch");
+                    conn.Close();
+                }
+            }
+
+            if (cboHopMin3 != null)
+            {
+                try
+                {
+                    conn.Open();
+                    command = new OleDbCommand();
+                    command.Connection = conn;
+                    string query = "select * from HOPLOOKUP where Minutes='" + cboHopMin3.Text + "'";
+                    command.CommandText = query;
+
+                    OleDbDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        hoputilization[2] = reader["HOPUTILIZATION"].ToString();
+                    }
+                    conn.Close();
+                    if (txtWaterVolume.Text.Length > 0)
+                    {
+                        ibuCalculator(IBU[2]);
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(txtHopAmt3.Text))
+                        {
+                            lblIBU3.Text = " ";
+                        }
+                        else
+                        {
+                            lblIBU3.Text = "0";
+                        }
+
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Hop3 minutes Change Catch");
+                    conn.Close();
+                }
+
+                if (cboHopMin4 != null)
+                    try
+                    {
+                        conn.Open();
+                        command = new OleDbCommand();
+                        command.Connection = conn;
+                        string query = "select * from HOPLOOKUP where Minutes='" + cboHopMin4.Text + "'";
+                        command.CommandText = query;
+
+                        OleDbDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            hoputilization[3] = reader["HOPUTILIZATION"].ToString();
+                        }
+                        conn.Close();
+                        if (txtWaterVolume.Text.Length > 0)
+                        {
+                            ibuCalculator(IBU[3]);
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(txtHopAmt4.Text))
+                            {
+                                lblIBU4.Text = " ";
+                            }
+                            else
+                            {
+                                lblIBU4.Text = "0";
+                            }
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Hop4 minutes Change Catch");
+                        conn.Close();
+                    }
+                if (cboHopMin5 != null)
+                {
+                    try
+                    {
+                        conn.Open();
+                        command = new OleDbCommand();
+                        command.Connection = conn;
+                        string query = "select * from HOPLOOKUP where Minutes='" + cboHopMin5.Text + "'";
+                        command.CommandText = query;
+
+                        OleDbDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            hoputilization[4] = reader["HOPUTILIZATION"].ToString();
+                        }
+                        conn.Close();
+                        if (txtWaterVolume.Text.Length > 0)
+                        {
+                            ibuCalculator(IBU[4]);
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(txtHopAmt5.Text))
+                            {
+                                lblIBU5.Text = " ";
+                            }
+                            else
+                            {
+                                lblIBU5.Text = "0";
+                            }
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Hop5 minutes Change Catch");
+                        conn.Close();
+                    }
+                    //MessageBox.Show("Hoputilizaton= " + hoputilization[0]);
+                }
+
+                else
+                {
+
+                }
+
+            }
+        }
     }
 }
+
 
